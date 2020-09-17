@@ -87,7 +87,6 @@ public class ServletVentes extends HttpServlet {
         String url = request.getRequestURI();
         
         // Récup et affichage par date décroissante de toutes les ventes   
-          
         if(url.equals("/EquidaWeb20/ServletVentes/listerLesVentes"))
         {  
             ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
@@ -120,6 +119,7 @@ public class ServletVentes extends HttpServlet {
            
         }
         
+        //Récup et affichage de la liste des chevaux en fonction d'une catégorie de vente
         if(url.equals("/EquidaWeb20/ServletVentes/listerLesChevaux"))
         {  
             
@@ -133,16 +133,17 @@ public class ServletVentes extends HttpServlet {
            
         }
         
-        if(url.equals("/EquidaWeb20/ServletVentes/listerInfosCheval"))
+        //Récup et affichage des informations d'un cheval 
+        if(url.equals("/EquidaWeb20/ServletVentes/listerLesInfosCheval"))
         {  
             
-            System.out.println("Dans lister les chevaux");
+            System.out.println("Dans lister infos cheval");
             String idCheval = (String)request.getParameter("idCheval");
 
-            ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idCheval);
-            System.out.println("NB chevaux" +lesChevaux.size());
-            request.setAttribute("pIdCheval", lesChevaux);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
+            Cheval unCheval = VenteDAO.getInfosCheval(connection, idCheval);
+            System.out.println("Nom cheval:" + unCheval.getNom());
+            request.setAttribute("pIdCheval", unCheval);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerInfosCheval.jsp").forward(request, response);
            
         } 
         

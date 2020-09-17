@@ -24,27 +24,29 @@
     <div class="container-lg">
         <h1>LISTE DES CHEVAUX EN VENTE</h1> 
          <%
-        Cheval unCheval = (Cheval)request.getAttribute("pLesChevaux");
+          //Cheval unCheval = (Cheval)request.getAttribute("pIdCheval");
         %>
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
               <tr>
                     <th>ID</th>
-                    <th>VENDEUR</th>
-                    <th>RACE</th>
+                    <th>NOM</th>
+                    <th>SEXE</th>
+                    <th>ENCHERE</th>
+                    <th>SIRE</th>
 
               </tr>
             </thead>
             <tbody>
                 <tr>
                     <%
-                    
+                    /*
                         out.println("<tr>");
                         out.println("<th scope='row'>");
                         out.println(unCheval.getId());
                         out.println("</th>");
 
-                        
+                       */ 
                     
                     %>
                 </tr>

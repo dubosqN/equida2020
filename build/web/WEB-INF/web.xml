@@ -56,7 +56,7 @@
     
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/listerInfosCheval</url-pattern>
+        <url-pattern>/ServletVentes/listerLesInfosCheval</url-pattern>
     </servlet-mapping>
     
     

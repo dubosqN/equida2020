@@ -213,21 +213,21 @@ public class VenteDAO {
             System.out.println("requete" + requete);
             rs=requete.executeQuery();
             
+            while ( rs.next() ) { 
                 unCheval.setId(rs.getInt("id"));
                 unCheval.setNom(rs.getString("nom"));
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setPrixDepart(rs.getInt("prixDepart"));
                 unCheval.setSIRE(rs.getString("SIRE"));
-
+             }
             
-            System.out.println("lesChevaux" + unCheval.getNom());
+            System.out.println("Cheval:" + unCheval.getNom());
         }   
         catch (SQLException e) 
         {
             e.printStackTrace();
         }
-        return unCheval ;
-        
+        return unCheval ; 
     }
 
     
