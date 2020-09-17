@@ -55,6 +55,10 @@
                         out.println(unCheval.getUnClient().getNom());
                         out.println("</td>");
                         
+                        out.println("<td><a href ='../ServletVentes/listerInfosCheval?idCheval="+ unCheval.getId()+"'>");
+                        out.println("Lister les infos du cheval");
+                        out.println("</td>");
+                        
                     }
                     %>
                 </tr>

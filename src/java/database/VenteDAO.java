@@ -200,7 +200,35 @@ public class VenteDAO {
         }
         return lesChevaux ;
         
-    } 
+    }
+   
+    public static Cheval  getInfosCheval(Connection connection, String idCheval){      
+        Cheval unCheval = new Cheval();
+        try
+        {
+             
+            requete=connection.prepareStatement("SELECT che.* FROM cheval as che where che.id = ?");
+            requete.setString(1, idCheval);
+            
+            System.out.println("requete" + requete);
+            rs=requete.executeQuery();
+            
+                unCheval.setId(rs.getInt("id"));
+                unCheval.setNom(rs.getString("nom"));
+                unCheval.setSexe(rs.getString("sexe"));
+                unCheval.setPrixDepart(rs.getInt("prixDepart"));
+                unCheval.setSIRE(rs.getString("SIRE"));
+
+            
+            System.out.println("lesChevaux" + unCheval.getNom());
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return unCheval ;
+        
+    }
 
     
 }

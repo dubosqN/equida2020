@@ -24,7 +24,7 @@
     <div class="container-lg">
         <h1>LISTE DES CHEVAUX EN VENTE</h1> 
          <%
-        ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
+        Cheval unCheval = (Cheval)request.getAttribute("pLesChevaux");
         %>
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
@@ -38,28 +38,14 @@
             <tbody>
                 <tr>
                     <%
-                    for(int i = 0; i < lesChevaux.size(); i++)
-                    {
-                        
-                        Cheval unCheval = lesChevaux.get(i); 
+                    
                         out.println("<tr>");
                         out.println("<th scope='row'>");
                         out.println(unCheval.getId());
                         out.println("</th>");
+
                         
-                        out.println("<td> ");
-                        out.println(unCheval.getLeTypeDeCheval().getLibelle());
-                        out.println("</td>");
-                        
-                        out.println("<td> ");
-                        out.println(unCheval.getUnClient().getNom());
-                        out.println("</td>");
-                        
-                        out.println("<td><a href ='../ServletVentes/listerInfosCheval?idCheval="+ unCheval.getId()+"'>");
-                        out.println("Lister les infos du cheval");
-                        out.println("</td>");
-                        
-                    }
+                    
                     %>
                 </tr>
             </tbody>

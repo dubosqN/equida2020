@@ -131,7 +131,20 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesChevaux", lesChevaux);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
            
-        }   
+        }
+        
+        if(url.equals("/EquidaWeb20/ServletVentes/listerInfosCheval"))
+        {  
+            
+            System.out.println("Dans lister les chevaux");
+            String idCheval = (String)request.getParameter("idCheval");
+
+            ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idCheval);
+            System.out.println("NB chevaux" +lesChevaux.size());
+            request.setAttribute("pIdCheval", lesChevaux);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
+           
+        } 
         
     }
 
