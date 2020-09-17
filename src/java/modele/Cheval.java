@@ -1,0 +1,105 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package modele;
+
+/**
+ *
+ * @author sio2
+ */
+public class Cheval {
+    private int id;
+    private String nom;
+    private String sexe;
+    private int prixDepart;
+    private String vendeur;
+    private String SIRE;
+    private TypeCheval leTypeDeCheval;
+    private Client unClient;
+    private Cheval mere;
+    private Cheval pere;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public int getPrixDepart() {
+        return prixDepart;
+    }
+
+    public void setPrixDepart(int prixDepart) {
+        this.prixDepart = prixDepart;
+    }
+
+    public String getVendeur() {
+        return vendeur;
+    }
+
+    public void setVendeur(String vendeur) {
+        this.vendeur = vendeur;
+    }
+
+    public String getSIRE() {
+        return SIRE;
+    }
+
+    public void setSIRE(String SIRE) {
+        this.SIRE = SIRE;
+    }
+
+    public TypeCheval getLeTypeDeCheval() {
+        return leTypeDeCheval;
+    }
+
+    public void setLeTypeDeCheval(TypeCheval leTypeDeCheval) {
+        this.leTypeDeCheval = leTypeDeCheval;
+    }
+
+    public Client getUnClient() {
+        return unClient;
+    }
+
+    public void setUnClient(Client unClient) {
+        this.unClient = unClient;
+    }
+
+    public Cheval getMere() {
+        return mere;
+    }
+
+    public void setMere(Cheval mere) {
+        this.mere = mere;
+    }
+
+    public Cheval getPere() {
+        return pere;
+    }
+
+    public void setPere(Cheval pere) {
+        this.pere = pere;
+    }
+    
+
+}
