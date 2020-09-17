@@ -4,8 +4,8 @@
     Author     : Zakina
 --%>
 
+<%@page import="modele.Cheval"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="modele.Vente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,15 +22,15 @@
     <body>
         
     <div class="container-lg">
-        <h1>LISTE DES CHEVAUX EN VENTE</h1>
+        <h1>LISTE DES CHEVAUX EN VENTE</h1> 
          <%
-        ArrayList<Vente> lesVentes = (ArrayList)request.getAttribute("pLesVentes");
+        ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
         %>
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
               <tr>
                     <th>ID</th>
-                    <th>NOM</th>
+                    <th>VENDEUR</th>
                     <th>RACE</th>
 
               </tr>
@@ -38,21 +38,23 @@
             <tbody>
                 <tr>
                     <%
-                    for(int i = 0; i < lesVentes.size();i++)
+                    for(int i = 0; i < lesChevaux.size(); i++)
                     {
                         
-                        Vente uneVente = lesVentes.get(i); 
+                        Cheval unCheval = lesChevaux.get(i); 
                         out.println("<tr>");
                         out.println("<th scope='row'>");
-                        out.println(uneVente.getId());
+                        out.println(unCheval.getId());
                         out.println("</th>");
                         
                         out.println("<td> ");
-                        out.println(uneVente.getNom());
+                        out.println(unCheval.getLeTypeDeCheval().getLibelle());
                         out.println("</td>");
                         
+                        out.println("<td> ");
+                        out.println(unCheval.getUnClient().getNom());
+                        out.println("</td>");
                         
-                               
                     }
                     %>
                 </tr>

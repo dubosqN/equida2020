@@ -37,6 +37,7 @@
                     <th>nbBOXES</th>  
                     <th>CLIENTS</th>
                     <th>MAILS</th>
+                    <th>CHEVAUX</th>
               </tr>
             </thead>
             <tbody>
@@ -79,6 +80,9 @@
                         out.println("Lister les mails concernés");
                         out.println("</td>");
                         
+                        out.println("<td><a href ='../ServletVentes/listerLesChevaux?idVente="+ uneVente.getId()+"'>");
+                        out.println("Lister les chevaux en vente");
+                        out.println("</td>");
                                
                     }
                     %>

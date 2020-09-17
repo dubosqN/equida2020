@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author sio2
@@ -20,6 +22,10 @@ public class Cheval {
     private Client unClient;
     private Cheval mere;
     private Cheval pere;
+    private ArrayList<Lot> lesLots;
+
+    public Cheval(){
+    }
 
     public int getId() {
         return id;
@@ -100,6 +106,21 @@ public class Cheval {
     public void setPere(Cheval pere) {
         this.pere = pere;
     }
-    
 
+    public ArrayList<Lot> getLesLots() {
+        return lesLots;
+    }
+
+    public void setLesLots(ArrayList<Lot> lesLots) {
+        this.lesLots = lesLots;
+    }
+
+    
+    public void addUnLot(Lot unLot){
+        if(lesLots == null){
+            lesLots = new ArrayList<Lot>();
+        }
+        lesLots.add(unLot);
+    }
+    
 }

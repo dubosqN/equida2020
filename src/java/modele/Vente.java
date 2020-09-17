@@ -19,6 +19,7 @@ public class Vente {
     private CategVente uneCategVente;
     private ArrayList<Courriel> lesCourriels ;
     private ArrayList<TypeCheval> lesTypesDeChevaux;
+    private Vente uneVente;
 
     public Vente() {
     }
@@ -98,4 +99,14 @@ public class Vente {
         }
         lesTypesDeChevaux.add(unTypeDeCheval);
     }
+
+    public Vente getUneVente() {
+        return uneVente;
+    }
+
+    public void setUneVente(Vente uneVente) {
+        this.uneVente = uneVente;
+    }
+    
+    
 }

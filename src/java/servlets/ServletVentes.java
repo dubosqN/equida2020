@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.Cheval;
 import modele.Client;
 import modele.Courriel;
 import modele.Vente;
@@ -119,7 +120,18 @@ public class ServletVentes extends HttpServlet {
            
         }
         
-        
+        if(url.equals("/EquidaWeb20/ServletVentes/listerLesChevaux"))
+        {  
+            
+            System.out.println("Dans lister les chevaux");
+            String idVente = (String)request.getParameter("idVente");
+
+            ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idVente);
+            System.out.println("NB chevaux" +lesChevaux.size());
+            request.setAttribute("pLesChevaux", lesChevaux);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
+           
+        }   
         
     }
 
