@@ -88,7 +88,7 @@ public class VenteDAO {
         {
             //preparation de la requete     
             //codeCateg="ETE";
-            requete=connection.prepareStatement("SELECT c.*, p.nom as nomPays, cv.libelle FROM client c, pays p, clientcategvente cc, categVente cv where c.codePays=p.code and cc.codeClient=c.id and cv.code=cc.codeCategVente and codeCategVente= ? ");
+            requete=connection.prepareStatement("SELECT c.*, p.nom as nomPays, cv.libelle FROM client c, pays p, clientcategvente cc, categVente cv where c.codePays=p.code and cc.codeClient=c.id and cv.code=cc.codeCategVente and codeCategVente= ? ORDER BY c.id");
             requete.setString(1, codeCateg);
             //executer la requete
             rs=requete.executeQuery();

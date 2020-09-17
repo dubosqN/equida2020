@@ -29,14 +29,14 @@
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
               <tr>
-                    <th>id</th>
-                    <th>nom</th>
-                    <th>date début</th>
-                    <th>catégorie</th>
-                    <th>Ville</th>
-                    <th>nbBoxes</th>  
-                    <th>Clients</th>
-                    <th>Mails</th>
+                    <th>ID</th>
+                    <th>NOM</th>
+                    <th>DATE DEBUT</th>
+                    <th>CATEGORIE</th>
+                    <th>VILLE</th>
+                    <th>nbBOXES</th>  
+                    <th>CLIENTS</th>
+                    <th>MAILS</th>
               </tr>
             </thead>
             <tbody>
