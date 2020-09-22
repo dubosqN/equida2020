@@ -17,19 +17,21 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         
-        <title>LISTE DES CHEVAUX EN VENTE</title>
+        <title>LISTE DES INFOS DU CHEVAL</title>
     </head>
     <body>
         
     <div class="container-lg">
-        <h1>LISTE DES CHEVAUX EN VENTE</h1> 
+        
          <%
-        Cheval unCheval = (Cheval)request.getAttribute("pLesChevaux");
+        Cheval unCheval = (Cheval)request.getAttribute("pIdCheval");
         %>
+        <h1>LISTE DES INFOS DU CHEVAL <% out.print("N° " + unCheval.getId()); %> </h1>
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
               <tr>
                     <th>ID</th>
+                    <th>PRIX</th>
                     <th>VENDEUR</th>
                     <th>RACE</th>
 
@@ -43,8 +45,20 @@
                         out.println("<th scope='row'>");
                         out.println(unCheval.getId());
                         out.println("</th>");
-
                         
+                        out.println("<td> ");
+                        out.println(unCheval.getPrixDepart());
+                        out.println("</td>");
+                        
+                        out.println("<td> ");
+                        out.println(unCheval.getUnClient().getNom());
+                        out.println("</td>");
+                        
+                        out.println("<td> ");
+                        out.println(unCheval.getLeTypeDeCheval().getLibelle());
+                        out.println("</td>");
+                        
+
                     
                     %>
                 </tr>

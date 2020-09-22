@@ -139,10 +139,11 @@ public class ServletVentes extends HttpServlet {
             System.out.println("Dans lister les chevaux");
             String idCheval = (String)request.getParameter("idCheval");
 
-            ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idCheval);
-            System.out.println("NB chevaux" +lesChevaux.size());
-            request.setAttribute("pIdCheval", lesChevaux);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
+            Cheval unCheval = VenteDAO.getInfosCheval(connection, idCheval);
+            System.out.println("Cheval:" + unCheval.getId());
+            System.out.println("NB chevaux" +unCheval.getNom());
+            request.setAttribute("pIdCheval", unCheval);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerInfosCheval.jsp").forward(request, response);
            
         } 
         

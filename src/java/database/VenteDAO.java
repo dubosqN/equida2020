@@ -198,35 +198,44 @@ public class VenteDAO {
         {
             e.printStackTrace();
         }
-        return lesChevaux ;
+        return lesChevaux;
         
     }
    
     public static Cheval  getInfosCheval(Connection connection, String idCheval){      
-        Cheval unCheval = new Cheval();
+        
+        Cheval unCheval = null;
         try
         {
-             
-            requete=connection.prepareStatement("SELECT che.* FROM cheval as che where che.id = ?");
-            requete.setString(1, idCheval);
+              unCheval = new Cheval();
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.prixDepart, typecheval.libelle as race, client.nom as nomVendeur from cheval,typecheval, client where cheval.id_client = client.id and cheval.id_typeCheval = typecheval.id and cheval.id = ?");
+            requete.setInt(1, Integer.parseInt(idCheval));
             
             System.out.println("requete" + requete);
             rs=requete.executeQuery();
-            
+             
+                while ( rs.next() ) {
+                //System.out.println("Cheval/1: " + unCheval.getId());
+                
                 unCheval.setId(rs.getInt("id"));
-                unCheval.setNom(rs.getString("nom"));
-                unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setPrixDepart(rs.getInt("prixDepart"));
-                unCheval.setSIRE(rs.getString("SIRE"));
-
-            
-            System.out.println("lesChevaux" + unCheval.getNom());
+                
+                Client unClient = new Client();
+                unClient.setNom(rs.getString("nomVendeur"));
+                
+                TypeCheval unTypeCheval = new TypeCheval();
+                unTypeCheval.setLibelle(rs.getString("race"));
+                
+                unCheval.setLeTypeDeCheval(unTypeCheval);
+                unCheval.setUnClient(unClient);
+                
+                }
         }   
         catch (SQLException e) 
         {
             e.printStackTrace();
         }
-        return unCheval ;
+        return unCheval;
         
     }
 
