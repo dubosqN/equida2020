@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 17 sep. 2020 à 11:42
+-- Généré le : mar. 22 sep. 2020 à 09:20
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `equida20testnew`
+-- Base de données : `equida20`
 --
 
 -- --------------------------------------------------------
@@ -226,6 +226,23 @@ INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `lot`
+--
+
+DROP TABLE IF EXISTS `lot`;
+CREATE TABLE IF NOT EXISTS `lot` (
+  `id` int(11) NOT NULL,
+  `prixDepart` int(11) DEFAULT NULL,
+  `id_cheval` int(11) DEFAULT NULL,
+  `id_vente` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_LOTCHE` (`id_cheval`),
+  KEY `FK_LOTVEN` (`id_vente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `mail`
 --
 
@@ -387,6 +404,13 @@ ALTER TABLE `clientcategvente`
 ALTER TABLE `contenir`
   ADD CONSTRAINT `contenir_ibfk_1` FOREIGN KEY (`id_mail`) REFERENCES `mail` (`id`),
   ADD CONSTRAINT `contenir_ibfk_2` FOREIGN KEY (`id_pj`) REFERENCES `piecesjointes` (`id`);
+
+--
+-- Contraintes pour la table `lot`
+--
+ALTER TABLE `lot`
+  ADD CONSTRAINT `FK_LOTCHE` FOREIGN KEY (`id_cheval`) REFERENCES `cheval` (`id`),
+  ADD CONSTRAINT `FK_LOTVEN` FOREIGN KEY (`id_vente`) REFERENCES `vente` (`id`);
 
 --
 -- Contraintes pour la table `mail`
