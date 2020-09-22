@@ -12,10 +12,12 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.CategVente;
+import modele.Cheval;
 import modele.Client;
 import modele.Courriel;
 import modele.Lieu;
 import modele.Pays;
+import modele.TypeCheval;
 import modele.Vente;
 
 /**
@@ -158,4 +160,87 @@ public class VenteDAO {
         }
         return lesCourriels ;    
     } 
+
+    
+   public static ArrayList<Cheval>  getLesChevaux(Connection connection, String idVente){      
+        ArrayList<Cheval> lesChevaux = new  ArrayList<Cheval>();
+        try
+        {
+             
+            requete=connection.prepareStatement("SELECT che.*, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t, vente where che.id_client = c.id and che.id_typeCheval=t.id and vente.id = ?");
+            requete.setString(1, idVente);
+            
+            System.out.println("requete" + requete);
+            rs=requete.executeQuery();
+            
+            while ( rs.next() ) { 
+                
+                Cheval unCheval = new Cheval();
+                unCheval.setId(rs.getInt("id"));
+                unCheval.setNom(rs.getString("nom"));
+
+                Client unClient = new Client();
+                unClient.setId(rs.getInt("id"));  
+                unClient.setNom(rs.getString("nomVendeur"));
+                
+                TypeCheval unTypeCheval = new TypeCheval();
+                unTypeCheval.setId(rs.getInt("id"));
+                unTypeCheval.setLibelle(rs.getString("race"));
+                
+                unCheval.setUnClient(unClient);
+                unCheval.setLeTypeDeCheval(unTypeCheval);
+                
+                lesChevaux.add(unCheval);
+
+            }
+            System.out.println("lesChevaux" + lesChevaux.size());
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return lesChevaux;
+        
+    }
+   
+    public static Cheval  getInfosCheval(Connection connection, String idCheval){      
+        
+        Cheval unCheval = null;
+        try
+        {
+              unCheval = new Cheval();
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.prixDepart, typecheval.libelle as race, client.nom as nomVendeur from cheval,typecheval, client where cheval.id_client = client.id and cheval.id_typeCheval = typecheval.id and cheval.id = ?");
+            requete.setInt(1, Integer.parseInt(idCheval));
+            
+            System.out.println("requete" + requete);
+            rs=requete.executeQuery();
+             
+                while ( rs.next() ) {
+                //System.out.println("Cheval/1: " + unCheval.getId());
+                
+                unCheval.setId(rs.getInt("id"));
+                unCheval.setPrixDepart(rs.getInt("prixDepart"));
+                
+                Client unClient = new Client();
+                unClient.setNom(rs.getString("nomVendeur"));
+                
+                TypeCheval unTypeCheval = new TypeCheval();
+                unTypeCheval.setLibelle(rs.getString("race"));
+                
+                unCheval.setLeTypeDeCheval(unTypeCheval);
+                unCheval.setUnClient(unClient);
+                
+                }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return unCheval;
+        
+    }
+
 }
+//SELECT che.*, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t where che.id_client = c.id and che.id_typeCheval=t.id
+//SELECT che.*, v.id, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t, vente v, vente_typecheval vt where che.id_client = c.id and che.id_typeCheval=t.id and t.id = vt.id_vente and vt.id_vente = v.id and v.id = 210717;
+//SELECT cheval.*, client.nom, typecheval.libelle where cheval.id_client = client.id and cheval.id = lot.id_cheval and lot.id_vente = vente.id and cheval.id_typeCheval = typecheval.id and vente.id = 210717;

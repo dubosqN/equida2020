@@ -4,8 +4,8 @@
     Author     : Zakina
 --%>
 
+<%@page import="modele.Cheval"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="modele.Vente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,73 +17,48 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         
-        <title>LISTE DES VENTES</title>
+        <title>LISTE DES CHEVAUX EN VENTE</title>
     </head>
     <body>
         
     <div class="container-lg">
-        <h1>LISTE DES VENTES</h1>
+        <h1>LISTE DES CHEVAUX EN VENTE</h1> 
          <%
-        ArrayList<Vente> lesVentes = (ArrayList)request.getAttribute("pLesVentes");
+        ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
         %>
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
               <tr>
                     <th>ID</th>
-                    <th>NOM</th>
-                    <th>DATE DEBUT</th>
-                    <th>CATEGORIE</th>
-                    <th>VILLE</th>
-                    <th>nbBOXES</th>  
-                    <th>CLIENTS</th>
-                    <th>MAILS</th>
-                    <th>CHEVAUX</th>
+                    <th>VENDEUR</th>
+                    <th>RACE</th>
+
               </tr>
             </thead>
             <tbody>
                 <tr>
                     <%
-                    for(int i = 0; i < lesVentes.size();i++)
+                    for(int i = 0; i < lesChevaux.size(); i++)
                     {
                         
-                        Vente uneVente = lesVentes.get(i); 
+                        Cheval unCheval = lesChevaux.get(i); 
                         out.println("<tr>");
                         out.println("<th scope='row'>");
-                        out.println(uneVente.getId());
+                        out.println(unCheval.getId());
                         out.println("</th>");
                         
                         out.println("<td> ");
-                        out.println(uneVente.getNom());
+                        out.println(unCheval.getLeTypeDeCheval().getLibelle());
                         out.println("</td>");
                         
                         out.println("<td> ");
-                        out.println(uneVente.getDateDebutVente());
+                        out.println(unCheval.getUnClient().getNom());
                         out.println("</td>");
                         
-                        out.println("<td> ");
-                        out.println(uneVente.getUneCategVente().getLibelle());
+                        out.println("<td><a href ='../ServletVentes/listerInfosCheval?idCheval="+ unCheval.getId()+"'>");
+                        out.println("Lister les infos du cheval");
                         out.println("</td>");
                         
-                        out.println("<td> ");
-                        out.println(uneVente.getUnLieu().getVille());
-                        out.println("</td>");
-                        
-                        out.println("<td> ");
-                        out.println(uneVente.getUnLieu().getNbBoxes());
-                        out.println("</td>");
-                        
-                        out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat="+ uneVente.getUneCategVente().getCode()+ "'>");
-                        out.println("Lister les clients interessés");
-                        out.println("</td>");
-                        
-                        out.println("<td><a href ='../ServletVentes/listerLesCourriels?idVente="+ uneVente.getId()+"'>");
-                        out.println("Lister les mails concernés");
-                        out.println("</td>");
-                        
-                        out.println("<td><a href ='../ServletVentes/listerLesChevaux?idVente="+ uneVente.getId()+"'>");
-                        out.println("Lister les chevaux en vente");
-                        out.println("</td>");
-                               
                     }
                     %>
                 </tr>

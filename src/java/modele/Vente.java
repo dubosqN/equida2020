@@ -18,6 +18,8 @@ public class Vente {
     private Lieu unLieu ;
     private CategVente uneCategVente;
     private ArrayList<Courriel> lesCourriels ;
+    private ArrayList<TypeCheval> lesTypesDeChevaux;
+    private Vente uneVente;
 
     public Vente() {
     }
@@ -82,6 +84,29 @@ public class Vente {
         }
         lesCourriels.add(unCourriel);
     }
+
+    public ArrayList<TypeCheval> getLesTypesDeChevaux() {
+        return lesTypesDeChevaux;
+    }
+
+    public void setLesTypesDeChevaux(ArrayList<TypeCheval> lesTypesDeChevaux) {
+        this.lesTypesDeChevaux = lesTypesDeChevaux;
+    }
 	
+    public void addUnTypeDeCheval(TypeCheval unTypeDeCheval){
+        if(lesTypesDeChevaux == null){
+            lesTypesDeChevaux = new ArrayList<TypeCheval>();
+        }
+        lesTypesDeChevaux.add(unTypeDeCheval);
+    }
+
+    public Vente getUneVente() {
+        return uneVente;
+    }
+
+    public void setUneVente(Vente uneVente) {
+        this.uneVente = uneVente;
+    }
+    
     
 }
