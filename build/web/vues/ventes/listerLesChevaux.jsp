@@ -30,8 +30,8 @@
             <thead>
               <tr>
                     <th>ID</th>
-                    <th>VENDEUR</th>
                     <th>RACE</th>
+                    <th>VENDEUR</th>
 
               </tr>
             </thead>

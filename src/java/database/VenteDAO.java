@@ -209,7 +209,7 @@ public class VenteDAO {
         try
         {
               unCheval = new Cheval();
-            requete=connection.prepareStatement("SELECT cheval.id, cheval.prixDepart, typecheval.libelle as race, client.nom as nomVendeur from cheval,typecheval, client where cheval.id_client = client.id and cheval.id_typeCheval = typecheval.id and cheval.id = ?");
+            requete=connection.prepareStatement("SELECT cheval.nom, typeCheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
             requete.setInt(1, Integer.parseInt(idCheval));
             
             System.out.println("requete" + requete);
@@ -219,10 +219,10 @@ public class VenteDAO {
                 //System.out.println("Cheval/1: " + unCheval.getId());
                 
                 unCheval.setId(rs.getInt("id"));
-                unCheval.setPrixDepart(rs.getInt("prixDepart"));
+                unCheval.setPrixDepart(rs.getInt("prixDep"));
                 
                 Client unClient = new Client();
-                unClient.setNom(rs.getString("nomVendeur"));
+                unClient.setNom(rs.getString("nomDuVendeur"));
                 
                 TypeCheval unTypeCheval = new TypeCheval();
                 unTypeCheval.setLibelle(rs.getString("race"));
@@ -244,3 +244,5 @@ public class VenteDAO {
 //SELECT che.*, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t where che.id_client = c.id and che.id_typeCheval=t.id
 //SELECT che.*, v.id, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t, vente v, vente_typecheval vt where che.id_client = c.id and che.id_typeCheval=t.id and t.id = vt.id_vente and vt.id_vente = v.id and v.id = 210717;
 //SELECT cheval.*, client.nom, typecheval.libelle where cheval.id_client = client.id and cheval.id = lot.id_cheval and lot.id_vente = vente.id and cheval.id_typeCheval = typecheval.id and vente.id = 210717;
+
+//SELECT cheval.nom, typeCheval.libelle as Race, lot.prixDepart as prixDepart, cheval.id_mere as mere, cheval.id_pere as pere FROM cheval, lot, vente, typecheval, client WHERE cheval.id_mere = cheval.id AND cheval.id_pere = cheval.id AND cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = 210717
