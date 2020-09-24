@@ -15,7 +15,9 @@ import modele.CategVente;
 import modele.Cheval;
 import modele.Client;
 import modele.Courriel;
+import modele.Course;
 import modele.Lieu;
+import modele.Participer;
 import modele.Pays;
 import modele.TypeCheval;
 import modele.Vente;
@@ -27,6 +29,7 @@ import modele.Vente;
  * Classe faisant la liaison entre la table Vente et la classe Vente
  */
 public class VenteDAO {
+
 
     
     Connection connection=null;
@@ -167,7 +170,7 @@ public class VenteDAO {
         try
         {
              
-            requete=connection.prepareStatement("SELECT che.*, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t, vente where che.id_client = c.id and che.id_typeCheval=t.id and vente.id = ?");
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, client.nom as nomVendeur, typeCheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
             requete.setString(1, idVente);
             
             System.out.println("requete" + requete);
@@ -209,7 +212,7 @@ public class VenteDAO {
         try
         {
               unCheval = new Cheval();
-            requete=connection.prepareStatement("SELECT cheval.nom, typeCheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, typecheval.libelle as Race, chevalPere.nom as pere, chevalMere.nom as mere, client.nom as nomVendeur FROM client, cheval, typecheval, cheval chevalPere, cheval chevalMere WHERE cheval.id_typeCheval = typecheval.id AND cheval.id_pere = chevalPere.id AND cheval.id_mere = chevalMere.id AND cheval.id_client = client.id AND cheval.id = ?");
             requete.setInt(1, Integer.parseInt(idCheval));
             
             System.out.println("requete" + requete);
@@ -218,17 +221,29 @@ public class VenteDAO {
                 while ( rs.next() ) {
                 //System.out.println("Cheval/1: " + unCheval.getId());
                 
+                
                 unCheval.setId(rs.getInt("id"));
-                unCheval.setPrixDepart(rs.getInt("prixDep"));
+               
+                Cheval unChevalPere = new Cheval();
+                unChevalPere.setNom(rs.getString("pere"));
+                
+                Cheval unChevalMere = new Cheval();
+                unChevalMere.setNom(rs.getString("mere"));
+                
                 
                 Client unClient = new Client();
-                unClient.setNom(rs.getString("nomDuVendeur"));
+                unClient.setNom(rs.getString("nomVendeur"));
                 
                 TypeCheval unTypeCheval = new TypeCheval();
-                unTypeCheval.setLibelle(rs.getString("race"));
+                unTypeCheval.setLibelle(rs.getString("Race"));
+                
                 
                 unCheval.setLeTypeDeCheval(unTypeCheval);
                 unCheval.setUnClient(unClient);
+                
+                unCheval.setPere(unChevalPere);
+                unCheval.setMere(unChevalMere);
+                
                 
                 }
         }   
@@ -237,6 +252,47 @@ public class VenteDAO {
             e.printStackTrace();
         }
         return unCheval;
+        
+    }
+    
+    public static ArrayList<Participer>  getLesCourses(Connection connection, String idCheval){      
+        ArrayList<Participer> lesParticipations = new  ArrayList<Participer>();
+        try
+        {
+             
+            requete=connection.prepareStatement("SELECT  cheval.id, cheval.nom, participer.id ,course.libelle, participer.place FROM cheval, course, participer WHERE cheval.id = participer.id_cheval AND course.id = participer.id_course AND cheval.id = ? ORDER BY participer.place;");
+            requete.setString(1, idCheval);
+            
+            System.out.println("requete" + requete);
+            rs=requete.executeQuery();
+            
+            while ( rs.next() ) { 
+                
+                Participer uneParticipation = new Participer();
+                uneParticipation.setId(rs.getInt("id"));
+                uneParticipation.setPlace(rs.getInt("place"));
+                
+                Cheval unCheval = new Cheval();
+                unCheval.setId(rs.getInt("id"));
+                unCheval.setNom(rs.getString("nom"));
+                
+                Course uneCourse = new Course();
+                uneCourse.setLibelle(rs.getString("libelle"));
+                
+                uneParticipation.setUnCheval(unCheval);
+                uneParticipation.setUneCourse(uneCourse);
+                
+                lesParticipations.add(uneParticipation);
+
+
+            }
+            System.out.println("lesChevaux" + lesParticipations.size());
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return lesParticipations;
         
     }
 

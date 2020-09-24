@@ -31,9 +31,10 @@
             <thead>
               <tr>
                     <th>ID</th>
-                    <th>PRIX</th>
                     <th>VENDEUR</th>
                     <th>RACE</th>
+                    <th>PERE</th>
+                    <th>MERE</th>
 
               </tr>
             </thead>
@@ -47,16 +48,26 @@
                         out.println("</th>");
                         
                         out.println("<td> ");
-                        out.println(unCheval.getPrixDepart());
-                        out.println("</td>");
-                        
-                        out.println("<td> ");
                         out.println(unCheval.getUnClient().getNom());
                         out.println("</td>");
                         
                         out.println("<td> ");
                         out.println(unCheval.getLeTypeDeCheval().getLibelle());
                         out.println("</td>");
+                        
+                        out.println("<td> ");
+                        out.println(unCheval.getPere().getNom());
+                        out.println("</td>");
+                        
+                        out.println("<td> ");
+                        out.println(unCheval.getMere().getNom());
+                        out.println("</td>");
+                        
+                        out.println("<td><a href ='../ServletVentes/listerCourseCheval?idCheval="+ unCheval.getId()+"'>");
+                        out.println("Lister les courses");
+                        out.println("</td>");
+                        
+
                         
 
                     

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import modele.Cheval;
 import modele.Client;
 import modele.Courriel;
+import modele.Participer;
 import modele.Vente;
 import org.omg.CORBA.SystemException;
 
@@ -144,6 +145,18 @@ public class ServletVentes extends HttpServlet {
             System.out.println("NB chevaux" +unCheval.getNom());
             request.setAttribute("pIdCheval", unCheval);
             getServletContext().getRequestDispatcher("/vues/ventes/listerInfosCheval.jsp").forward(request, response);
+           
+        } 
+        
+        if(url.equals("/EquidaWeb20/ServletVentes/listerCourseCheval"))
+        {  
+            
+            System.out.println("Dans lister les courses");
+            String idCheval = (String)request.getParameter("idCheval");
+
+            ArrayList<Participer> lesParticipations = VenteDAO.getLesCourses(connection, idCheval);
+            request.setAttribute("pIdCheval", lesParticipations);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerCourseCheval.jsp").forward(request, response);
            
         } 
         

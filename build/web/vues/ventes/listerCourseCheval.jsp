@@ -4,7 +4,7 @@
     Author     : Zakina
 --%>
 
-<%@page import="modele.Cheval"%>
+<%@page import="modele.Participer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,52 +17,46 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         
-        <title>LISTE DES CHEVAUX EN VENTE</title>
+        <title>LISTE DES COURSES</title>
     </head>
     <body>
         
     <div class="container-lg">
-        <h1>LISTE DES CHEVAUX EN VENTE</h1> 
+        
          <%
-        ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
+        ArrayList<Participer> lesParticipations = (ArrayList)request.getAttribute("pIdCheval");
         %>
+        
+        <h1>LISTE DES COURSES DE <% out.print("" + lesParticipations.get(0).getUnCheval().getNom().toUpperCase()); %> </h1> 
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
               <tr>
-                    <th>ID</th>
-                    <th>NOM</th>
-                    <th>RACE</th>
-                    <th>VENDEUR</th>
+                    
+                    <th>POSITION</th>
+                    <th>COURSE</th>
+
 
               </tr>
             </thead>
             <tbody>
                 <tr>
                     <%
-                    for(int i = 0; i < lesChevaux.size(); i++)
+                    for(int i = 0; i < lesParticipations.size(); i++)
                     {
                         
-                        Cheval unCheval = lesChevaux.get(i); 
-                        out.println("<tr>");
+                        Participer uneParticipation = lesParticipations.get(i); 
+
+                        out.println("<tr> ");
                         out.println("<th scope='row'>");
-                        out.println(unCheval.getId());
-                        out.println("</th>");
+                        out.println(uneParticipation.getPlace());
+                        out.println("</td>");
+                        
                         
                         out.println("<td> ");
-                        out.println(unCheval.getNom());
+                        out.println(uneParticipation.getUneCourse().getLibelle());
                         out.println("</td>");
                         
-                        out.println("<td> ");
-                        out.println(unCheval.getLeTypeDeCheval().getLibelle());
-                        out.println("</td>");
-                        
-                        out.println("<td> ");
-                        out.println(unCheval.getUnClient().getNom());
-                        out.println("</td>");
-                        
-                        out.println("<td><a href ='../ServletVentes/listerInfosCheval?idCheval="+ unCheval.getId()+"'>");
-                        out.println("Lister les infos du cheval");
-                        out.println("</td>");
+                       
                         
                     }
                     %>

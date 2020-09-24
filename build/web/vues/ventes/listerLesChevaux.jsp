@@ -30,6 +30,7 @@
             <thead>
               <tr>
                     <th>ID</th>
+                    <th>NOM</th>
                     <th>RACE</th>
                     <th>VENDEUR</th>
 
@@ -46,6 +47,10 @@
                         out.println("<th scope='row'>");
                         out.println(unCheval.getId());
                         out.println("</th>");
+                        
+                        out.println("<td> ");
+                        out.println(unCheval.getNom());
+                        out.println("</td>");
                         
                         out.println("<td> ");
                         out.println(unCheval.getLeTypeDeCheval().getLibelle());
