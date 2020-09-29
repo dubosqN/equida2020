@@ -64,6 +64,11 @@
         <url-pattern>/ServletVentes/listerCourseCheval</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletCategorie</servlet-name>
+        <url-pattern>/ServletCategorie/ajouterCategorie</url-pattern>
+    </servlet-mapping>
+    
     
     <session-config>
         <session-timeout>
