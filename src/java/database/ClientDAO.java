@@ -5,11 +5,14 @@
  */
 package database;
 
+import static database.PaysDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.Client;
+import modele.Pays;
 
 /**
  *
@@ -23,7 +26,42 @@ public class ClientDAO {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    
+    public static ArrayList<Client> getLesClients(Connection connection){      
+        ArrayList<Client> lesClients = new  ArrayList<Client>();
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("select * from clients");
+            
+            //executer la requete
+            rs=requete.executeQuery();
+            
+            //On hydrate l'objet métier Client avec les résultats de la requête
+            while ( rs.next() ) {  
+                Client unClient = new Client();
+                unClient.setId(rs.getInt("id"));
+                unClient.setNom(rs.getString("nom"));
+                unClient.setPrenom(rs.getString("prenom"));
+                unClient.setRue(rs.getString("rue"));
+                unClient.setCopos(rs.getString("copos"));
+                unClient.setVille(rs.getString("ville"));
+                unClient.setMail(rs.getString("mail"));
+                
+                Pays unPays = new Pays();
+                unPays.setCode(rs.getString("codePays"));
+                
+                unClient.setUnPays(unPays);
+
+                lesClients.add(unClient);
+            }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return lesClients ;    
+    } 
     
     // Méthode permettant d'insérer un client en base à partir de l'objet client passé en paramètre
     // Cette méthode renvoie l'objet client

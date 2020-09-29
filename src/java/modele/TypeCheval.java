@@ -18,6 +18,14 @@ public class TypeCheval {
     private ArrayList<Vente> lesVentes;
     private ArrayList<Cheval> lesChevaux;
 
+    public TypeCheval(String typeCheval) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public TypeCheval() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }
