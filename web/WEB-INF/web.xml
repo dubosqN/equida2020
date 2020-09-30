@@ -69,10 +69,6 @@
         <url-pattern>/ServletCategorie/ajouterCategorie</url-pattern>
     </servlet-mapping>
     
-    <servlet-mapping>
-        <servlet-name>ServletCheval</servlet-name>
-        <url-pattern>/ServletCheval/ajouterCheval</url-pattern>
-    </servlet-mapping>
     
     
     <session-config>
