@@ -15,6 +15,10 @@ public class TypeCheval {
 
     public TypeCheval() {
     }
+    
+    public TypeCheval(int id) {
+        this.id = id;
+    }
 
     
 

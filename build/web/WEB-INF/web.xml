@@ -28,6 +28,14 @@
         <servlet-name>ServletClient</servlet-name>
         <servlet-class>servlets.ServletClient</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCheval</servlet-name>
+        <servlet-class>servlets.ServletCheval</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCategorie</servlet-name>
+        <servlet-class>servlets.ServletCategorie</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes</url-pattern>
@@ -69,8 +77,16 @@
         <url-pattern>/ServletCategorie/ajouterCategorie</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletCheval</servlet-name>
+        <url-pattern>/ServletCheval/ajouterCheval</url-pattern>
+    </servlet-mapping>
     
-    
+    <servlet-mapping>
+        <servlet-name>ServletCheval</servlet-name>
+        <url-pattern>/ServletCheval/listerCheval</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

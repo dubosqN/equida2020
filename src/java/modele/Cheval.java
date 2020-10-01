@@ -22,6 +22,10 @@ public class Cheval {
 
     public Cheval(){
     }
+    
+    public Cheval(int id){
+        this.id = id;
+    }
 
 
     public int getId() {

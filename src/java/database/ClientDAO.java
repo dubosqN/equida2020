@@ -24,7 +24,7 @@ public class ClientDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from clients");
+            requete=connection.prepareStatement("select * from client");
             
             //executer la requete
             rs=requete.executeQuery();
