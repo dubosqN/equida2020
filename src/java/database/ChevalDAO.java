@@ -6,8 +6,8 @@
 package database;
 
 /**
- *
- * @author sio2
+ * update 01/10/2020
+ * @author DUBOSQ
  */
 public class ChevalDAO {
     
