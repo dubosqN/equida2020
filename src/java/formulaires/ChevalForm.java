@@ -95,12 +95,6 @@ public class ChevalForm {
         unCheval.setPrixDepart(Integer.parseInt(prixDepart));
         unCheval.setSIRE(SIRE);
         
-        unCheval.setUnClient(new Client(client));
-        unCheval.setLeTypeDeCheval(new TypeCheval(typeCheval));
-        
-        unCheval.setMere(new Cheval(mere));
-        unCheval.setPere(new Cheval(pere));
-        
                
        
         return unCheval ;
