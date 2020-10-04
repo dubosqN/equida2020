@@ -91,11 +91,11 @@
                         out.println("</td>");
                         
                         out.println("<td><a href ='../ServletVentes/listerLesCourriels?idVente="+ unCheval.getId()+"'>");
-                        out.println("<i class='fas fa-edit'></i>");
+                        out.println("<center><i class='fas fa-edit text-dark'></i></center>");
                         out.println("</td>");
                         
-                        out.println("<td><a href ='../ServletVentes/listerLesChevaux?idVente="+ unCheval.getId()+"'>");
-                        out.println("<i class='fas fa-trash-alt'></i>");
+                        out.println("<td><a href ='../ServletCheval/deleteCheval?idCheval="+ unCheval.getId()+"'>");
+                        out.println("<center><i class='fas fa-trash-alt text-dark'></i></center>");
                         out.println("</td>");
                         
                                

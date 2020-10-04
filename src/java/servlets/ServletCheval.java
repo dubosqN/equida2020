@@ -112,6 +112,13 @@ public class ServletCheval extends HttpServlet {
             request.setAttribute("pLesChevaux", lesChevaux);
             getServletContext().getRequestDispatcher("/vues/cheval/chevalLister.jsp").forward(request, response);
         }
+       
+       if(url.equals("/EquidaWeb20/ServletCheval/deleteCheval"))
+        {  
+            int idCheval = Integer.parseInt(request.getParameter("idCheval"));
+            ChevalDAO.deleteCheval(connection, idCheval);
+            getServletContext().getRequestDispatcher("/vues/cheval/chevalLister.jsp").forward(request, response);
+        }
     }
 
     /**

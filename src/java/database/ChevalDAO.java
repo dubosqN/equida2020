@@ -40,7 +40,6 @@ public class ChevalDAO {
             //executer la requete
             rs=requete.executeQuery();
             
-            //On hydrate l'objet métier Client avec les résultats de la requête
             while ( rs.next() ) {
                 Cheval unCheval = new Cheval();
                 unCheval.setId(rs.getInt("id"));
@@ -117,4 +116,14 @@ public class ChevalDAO {
         }
         return unCheval;    
     }
+     
+     public void deleteCheval(Connection connection, int idCheval){
+         try {
+             requete=connection.prepareStatement("DELETE FROM cheval WHERE id = ?");
+             requete.setInt(1, idCheval);
+             rs=requete.executeQuery();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
 }

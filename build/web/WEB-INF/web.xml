@@ -86,6 +86,11 @@
         <servlet-name>ServletCheval</servlet-name>
         <url-pattern>/ServletCheval/listerCheval</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletCheval</servlet-name>
+        <url-pattern>/ServletCheval/deleteCheval</url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>

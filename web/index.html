@@ -14,25 +14,76 @@
       
       
       <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="vues/Images/black-head-horse-side-view-with-horsehair.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
-        Equida
-        </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-         <a class="nav-link active" href="#">Accueil <span class="sr-only">(current)</span></a>
-         <a class="nav-link" href="/EquidaWeb20/ServletVentes/listerLesVentes">listerLesVentes</a>
-         <a class="nav-link" href="/EquidaWeb20/ServletClient/ajouterClient">ajouterClient</a>
-         <a class="nav-link" href="#">Test</a>
-        </div>
-    </div>
-    </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+            <a class="navbar-brand" href="#">
+                <img src="vues/Images/black-head-horse-side-view-with-horsehair.png" width="30" height="30" class="d-inline-block align-top"  alt="" loading="lazy">
+                Master
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/EquidaWeb20">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <!-- Item à ajouter
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Items</a>
+                </li>
+                -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Servlet (dev)
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/EquidaWeb20/ServletVentes/listerLesVentes">Lister les ventes</a>
+                    <a class="dropdown-item" href="/EquidaWeb20/ServletClient/ajouterClient">Ajouter un client</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/ajouterCheval">Ajouter Cheval</a>
+                    <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/listerCheval">Lister les chevaux</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="text-dark px-3 text-decoration-none" type="submit">Se connecter</a>
+              <a class="btn btn-outline-success my-2 my-sm-0" type="submit">S'inscrire</a>
+            </div>
+          </nav>
       <!-- FIN DE LA NAVBAR -->
       <!-- NOE MODIF1 -->
+
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-7 text-center text-md-left">
+                  <h1>Master.</h1>
+                  <p>Pour les meilleurs, par les meilleurs</p>
+              </div>
+                <div class="col-5 col-md-4 text-center text-md-left">
+                    <div class="p-3 mb-2 bg-white text-dark rounded-lg">
+                        <form>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Nom d'utilisateur</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Mot de passe</label>
+                          <input type="password" class="form-control" id="">
+                          <small id="emailHelp" class="form-text text-muted">Votre mot de passe devrait contenir au moins 8 caractères, une majuscule et un chiffre.</small>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Rejoindre Master</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+         </div>    
+      </div>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
