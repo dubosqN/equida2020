@@ -7,8 +7,9 @@
             <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/database/ChevalDAO.java</file>
             <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/database/VenteDAO.java</file>
             <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/vues/clients/clientAjouter.jsp</file>
             <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/servlets/ServletCheval.java</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/servlets/ServletVentes.java</file>
+            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/modele/Cheval.java</file>
             <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/vues/cheval/chevalAjouter.jsp</file>
             <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/vues/cheval/chevalLister.jsp</file>
         </group>
