@@ -13,6 +13,7 @@ public class Cheval {
     private int prixDepart;
     private String vendeur;
     private String SIRE;
+    private String img_url;
     private TypeCheval leTypeDeCheval;
     private Client unClient;
     private Cheval mere;
@@ -76,6 +77,14 @@ public class Cheval {
         this.SIRE = SIRE;
     }
 
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+    
     public TypeCheval getLeTypeDeCheval() {
         return leTypeDeCheval;
     }

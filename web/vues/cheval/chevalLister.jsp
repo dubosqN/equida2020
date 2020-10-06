@@ -32,18 +32,21 @@
         <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">
             <thead>
               <tr>
-                    <th>ID</th>
-                    <th>NOM</th>
-                    <th>SEXE</th>
-                    <th>PRIX DEPART</th>
-                    <th>SIRE</th>
-                    <th>CLIENT</th>  
-                    <th>TYPE CHEVAL</th>
-                    <th>MERE</th>
-                    <th>PERE</th>
+            
+                    <th class="align-middle">ID</th>
+                    <th class="align-middle">NOM</th>
+                    <th class="align-middle">SEXE</th>
+                    <th class="align-middle">PRIX DEPART</th>
+                    <th class="align-middle">SIRE</th>
+                    <th class="align-middle">IMG</th>
+                    <th class="align-middle">CLIENT</th>  
+                    <th class="align-middle">TYPE CHEVAL</th>
+                    <th class="align-middle">MERE</th>
+                    <th class="align-middle">PERE</th>
                     
-                    <th>Modifier</th>
-                    <th>Supprimer</th>
+                    <th class="align-middle">MODIFIER</th>
+                    <th class="align-middle">SUPPRIMER</th>
+              
               </tr>
             </thead>
             <tbody>
@@ -54,48 +57,56 @@
                         
                         Cheval unCheval = lesChevaux.get(i); 
                         out.println("<tr>");
-                        out.println("<th scope='row'>");
+                        out.println("<th scope='row' class='align-middle'>");
                         out.println(unCheval.getId());
                         out.println("</th>");
                         
-                        out.println("<td> ");
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getNom());
-                        out.println("</td>");
+                        out.println("</td class='align-middle'>");
                         
-                        out.println("<td> ");
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getSexe());
                         out.println("</td>");
                         
-                        out.println("<td> ");
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getPrixDepart());
                         out.println("</td>");
                         
-                        out.println("<td> ");
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getSIRE());
                         out.println("</td>");
                         
-                        out.println("<td> ");
+                        //out.println("<td> ");
+                        //out.println("<img src=../vue/images/" + unCheval.getImg_url()+ ">");
+                        //out.println("</td>");
+                        
+                        out.println("<td class='align-middle'> ");
+                        out.println("<img src='../vues/Images/"+ unCheval.getImg_url() +"' width='100' height='100'>");
+                        out.println("</td>");
+                        
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getUnClient().getNom());
                         out.println("</td>");
                         
-                        out.println("<td> ");
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getLeTypeDeCheval().getLibelle());
                         out.println("</td>");
                         
-                        out.println("<td> ");
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getMere().getNom());
-                        out.println("</td>");
+                        out.println("</td class='align-middle'>");
                         
-                        out.println("<td> ");
+                        out.println("<td class='align-middle'> ");
                         out.println(unCheval.getPere().getNom());
+                        out.println("</td class='align-middle'>");
+                        
+                        out.println("<td class='align-middle'><a href ='../ServletVentes/listerLesCourriels?idVente="+ unCheval.getId()+"'>");
+                        out.println("<center><i class='fas fa-edit text-dark'></i></center>");
                         out.println("</td>");
                         
-                        out.println("<td><a href ='../ServletVentes/listerLesCourriels?idVente="+ unCheval.getId()+"'>");
-                        out.println("<i class='fas fa-edit'></i>");
-                        out.println("</td>");
-                        
-                        out.println("<td><a href ='../ServletVentes/listerLesChevaux?idVente="+ unCheval.getId()+"'>");
-                        out.println("<i class='fas fa-trash-alt'></i>");
+                        out.println("<td class='align-middle'><a href ='../ServletCheval/deleteCheval?idCheval="+ unCheval.getId()+"'>");
+                        out.println("<center><i class='fas fa-trash-alt text-dark'></i></center>");
                         out.println("</td>");
                         
                                
@@ -104,7 +115,6 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

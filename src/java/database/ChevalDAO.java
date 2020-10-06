@@ -32,7 +32,7 @@ public class ChevalDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, cheval.sexe, cheval.prixDepart, cheval.SIRE, typecheval.libelle as Race, chevalPere.nom as pere, chevalMere.nom as mere, client.nom as nomVendeur "
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, cheval.sexe, cheval.prixDepart, cheval.SIRE, cheval.img_url, typecheval.libelle as Race, chevalPere.nom as pere, chevalMere.nom as mere, client.nom as nomVendeur "
                     + "FROM client, cheval, typecheval, cheval chevalPere, cheval chevalMere "
                     + "WHERE cheval.id_typeCheval = typecheval.id AND cheval.id_pere = chevalPere.id AND cheval.id_mere = chevalMere.id AND cheval.id_client = client.id "
                     + "ORDER BY cheval.id;");
@@ -40,7 +40,6 @@ public class ChevalDAO {
             //executer la requete
             rs=requete.executeQuery();
             
-            //On hydrate l'objet métier Client avec les résultats de la requête
             while ( rs.next() ) {
                 Cheval unCheval = new Cheval();
                 unCheval.setId(rs.getInt("id"));
@@ -48,6 +47,7 @@ public class ChevalDAO {
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setPrixDepart(rs.getInt("prixDepart"));
                 unCheval.setSIRE(rs.getString("SIRE"));
+                unCheval.setImg_url(rs.getString("img_url"));
                
                 Cheval unChevalPere = new Cheval();
                 unChevalPere.setNom(rs.getString("pere"));
@@ -117,4 +117,14 @@ public class ChevalDAO {
         }
         return unCheval;    
     }
+     
+     public void deleteCheval(Connection connection, int idCheval){
+         try {
+             requete=connection.prepareStatement("DELETE FROM cheval WHERE id = ?");
+             requete.setInt(1, idCheval);
+             rs=requete.executeQuery();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
 }

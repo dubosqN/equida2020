@@ -24,7 +24,7 @@
             %>
         <div class="container-lg">
             <h1 class="display-3">NOUVEAU CHEVAL</h1>
-        <form action="ajouterCheval" method="POST">
+            <form action="ajouterCheval" method="POST">
             <div class="form-group">
                 <label for="nom">Nom : </label>
                 <input class="form-control" id="nom" type="text" name="nom"  size="30" maxlength="30" >
