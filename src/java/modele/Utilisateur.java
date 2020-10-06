@@ -12,6 +12,7 @@ package modele;
 public class Utilisateur {
     private int id;
     private String username;
+    private String email;
     private String password;
     private Role role;
 
@@ -39,6 +40,14 @@ public class Utilisateur {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public Role getRole() {
         return role;
     }

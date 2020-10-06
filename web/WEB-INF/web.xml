@@ -97,19 +97,16 @@
         <servlet-name>ServletCheval</servlet-name>
         <url-pattern>/ServletCheval/deleteCheval</url-pattern>
     </servlet-mapping>
-    
+
     <servlet-mapping>
-<<<<<<< HEAD
-        <servlet-name>default</servlet-name>
-        <url-pattern>/vues/Images/*</url-pattern>
-    </servlet-mapping>
-=======
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    
->>>>>>> dfc84497ad8d494b7b5d563510bb94684d138148
 
+    <servlet-mapping>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/rejoindre</url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>

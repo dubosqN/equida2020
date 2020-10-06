@@ -5,7 +5,12 @@
  */
 package servlets;
 
+import database.ChevalDAO;
+import database.ClientDAO;
+import database.TypeDeChevalDAO;
+import database.UserDAO;
 import database.VenteDAO;
+import formulaires.LoginForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,6 +21,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.Cheval;
+import modele.Client;
+import modele.TypeCheval;
 import modele.Utilisateur;
 import modele.Vente;
 
@@ -56,7 +64,7 @@ public class ServletLogin extends HttpServlet {
             out.println("<title>Servlet ServletLogin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletLogin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletLogin at " + request.getContextPath() + " dkdnkdnkd</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -84,13 +92,7 @@ public class ServletLogin extends HttpServlet {
         {  
             getServletContext().getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
         }
-        
-        if(url.equals("/EquidaWeb20/connexion"))
-        {  
-            Utilisateur unUtilisateur = new Utilisateur();
-            request.setAttribute("pUser", unUtilisateur);
-            getServletContext().getRequestDispatcher("/vues/admin/Accueil.jsp").forward(request, response);
-        }
+
     }
 
     /**
@@ -104,7 +106,20 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        LoginForm form = new LoginForm();
+        Utilisateur unUtilisateur = form.ajouterUtilisateur(request);
+
+        request.setAttribute("form", form);
+        request.setAttribute("pUSer", unUtilisateur);
+
+        System.out.println("servlets.ServletLogin.doPost()");
+        System.out.println(unUtilisateur);
+        
+        UserDAO.ajouterUtilisateur(connection, unUtilisateur);
+
+        getServletContext().getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
+
     }
 
     /**
