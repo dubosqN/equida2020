@@ -3,26 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/web/vues/cheval/chevalLister.jsp</file>
-            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/src/java/database/ChevalDAO.java</file>
-            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/src/java/formulaires/ClientForm.java</file>
-            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/web/vues/ventes/listerLesVentes.jsp</file>
+            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/src/java/servlets/ServletVentes.java</file>
             <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/src/java/formulaires/ChevalForm.java</file>
-            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/web/vues/cheval/chevalAjouter.jsp</file>
-            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/web/vues/cheval/chevalConsulter.jsp</file>
-            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/src/java/servlets/ServletClient.java</file>
+            <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/web/index.html</file>
             <file>file:/E:/DUBOSQ_Noé/SLAM/SLAM45/equida2020/src/java/servlets/ServletCheval.java</file>
-=======
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/index.html</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/database/ChevalDAO.java</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/database/VenteDAO.java</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/servlets/ServletCheval.java</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/src/java/servlets/ServletVentes.java</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/vues/cheval/chevalAjouter.jsp</file>
-            <file>file:/C:/Users/noedu/OneDrive/Documents/NetBeansProjects/MASTER/web/vues/cheval/chevalLister.jsp</file>
->>>>>>> 10e435c7e28969a04674c9a88820ea8dc987b6af
         </group>
     </open-files>
 </project-private>
