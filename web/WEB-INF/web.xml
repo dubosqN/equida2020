@@ -40,8 +40,14 @@
         <servlet-name>ServletLogin</servlet-name>
         <servlet-class>servlets.ServletLogin</servlet-class>
     </servlet>
-    
-    
+    <servlet>
+        <servlet-name>ServletDeconnexion</servlet-name>
+        <servlet-class>servlets.ServletLogout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletConnexion</servlet-name>
+        <servlet-class>servlets.ServletConnexion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes</url-pattern>
@@ -62,52 +68,53 @@
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesCourriels</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesChevaux</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerInfosCheval</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerCourseCheval</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ServletCategorie</servlet-name>
         <url-pattern>/ServletCategorie/ajouterCategorie</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ServletCheval</servlet-name>
         <url-pattern>/ServletCheval/ajouterCheval</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ServletCheval</servlet-name>
         <url-pattern>/ServletCheval/listerCheval</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ServletCheval</servlet-name>
         <url-pattern>/ServletCheval/deleteCheval</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/rejoindre</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>ServletConnexion</servlet-name>
+        <url-pattern>/connexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletDeconnexion</servlet-name>
+        <url-pattern>/_deconnexion</url-pattern>
+    </servlet-mapping>
+    
+    
+    
     <session-config>
         <session-timeout>
             30

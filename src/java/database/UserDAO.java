@@ -24,25 +24,39 @@ public class UserDAO {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    public Utilisateur getUtilisateur(Connection connection, String username, String password){
-        Utilisateur unUtilisateur = new Utilisateur();
+    public String authentification(Connection connection, Utilisateur unUtilisateur){
+        String username = unUtilisateur.getUsername();
+        String password = unUtilisateur.getPassword();
+        
+        String usernameDB = "";
+        String passwordDB = "";
+        String roleDB = "";
         
         try {
-            requete=connection.prepareStatement("select * from utilisateur where username = ? and password = ?");
-            requete.setString(1, username);
-            requete.setString(2, username);
-            rs=requete.executeQuery();
+            requete = connection.prepareStatement("SELECT utilisateur.username, utilisateur.password, role.libelle as role from utilisateur, role where utilisateur.id_role = role.id");
+            rs = requete.executeQuery();
             
             while (rs.next()) {
-                unUtilisateur.setUsername(rs.getString(username));
-                unUtilisateur.setPassword(rs.getString(password));
-                
+                usernameDB = rs.getString("username");
+                passwordDB = rs.getString("password");
+                roleDB = rs.getString("role");
+
+                if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("admin")) {
+                    return "admin";
+                } else if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("employee")) {
+                    return "employee";
+                } else if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("acheteur")) {
+                    return "acheteur";
+                } else if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("vendeur")) {
+                    return "vendeur";
+                }
             }
-            
-            
+          
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        return unUtilisateur;
+        
+        return "Erreur d'authentifcation";
     }
     
     public static Utilisateur ajouterUtilisateur(Connection connection, Utilisateur unUtilisateur){      

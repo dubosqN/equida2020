@@ -68,25 +68,9 @@ public class LoginForm {
         unUtilisateur.setUsername(username);
         unUtilisateur.setPassword(password);
         unUtilisateur.setRole(new Role(role));
-       
-        System.out.println("formulaires.LoginForm.ajouterUtilisateur()");
+
        
         return unUtilisateur;
     }
 
-    
-    public Utilisateur login( HttpServletRequest request ) {
-      
-        Utilisateur unUtilisateur = new Utilisateur();
-         
-        String username = getDataForm(request, "username");
-        String password = getDataForm(request, "password" );
-
-       
-        unUtilisateur.setUsername(username);
-        unUtilisateur.setPassword(password);
-        
-       
-        return unUtilisateur ;
-    }
 }

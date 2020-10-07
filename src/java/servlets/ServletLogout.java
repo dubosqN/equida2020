@@ -5,45 +5,33 @@
  */
 package servlets;
 
-import database.ChevalDAO;
-import database.ClientDAO;
-import database.TypeDeChevalDAO;
-import database.UserDAO;
-import database.VenteDAO;
-import formulaires.LoginForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Cheval;
-import modele.Client;
-import modele.TypeCheval;
-import modele.Utilisateur;
-import modele.Vente;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sio2
+ * @author noedu
  */
-@WebServlet(name = "ServletLogin", urlPatterns = {"/ServletLogin"})
-public class ServletLogin extends HttpServlet {
-    
-    Connection connection ;
-      
-        
-    @Override
-    public void init()
-    {     
-        ServletContext servletContext=getServletContext();
-        connection=(Connection)servletContext.getAttribute("connection");
-    }
+@WebServlet(name = "ServletLogout", urlPatterns = {"/ServletLogout"})
+public class ServletLogout extends HttpServlet {
 
+    Connection connection;
+
+    @Override
+    public void init() {
+        ServletContext servletContext = getServletContext();
+        connection = (Connection) servletContext.getAttribute("connection");
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,10 +49,10 @@ public class ServletLogin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletLogin</title>");            
+            out.println("<title>Servlet ServletLogout</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletLogin at " + request.getContextPath() + " dkdnkdnkd</h1>");
+            out.println("<h1>Servlet ServletLogout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,20 +70,19 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+           
         
-        String url = request.getRequestURI();
-
-          
-        if(url.equals("/EquidaWeb20/login"))
-        {  
-            getServletContext().getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        
+        if(session!=null){
+            session.invalidate();
+            request.setAttribute("errMessage", "Déconnexion");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login");
+            requestDispatcher.forward(request, response);
+            System.out.println("------------------ Deconnexion ---------------");
+            
         }
         
-        if(url.equals("/EquidaWeb20/admin"))
-        {  
-            getServletContext().getRequestDispatcher("/vues/admin/Admin.jsp").forward(request, response);
-        }
-
     }
 
     /**
@@ -109,23 +96,7 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        LoginForm form = new LoginForm();
-        Utilisateur unUtilisateur = form.ajouterUtilisateur(request);
-
-        request.setAttribute("form", form);
-        request.setAttribute("pUSer", unUtilisateur);
-
-        System.out.println("servlets.ServletLogin.doPost()");
-        System.out.println(unUtilisateur);
-        
-        UserDAO.ajouterUtilisateur(connection, unUtilisateur);
-
-        getServletContext().getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
-        
-        
-
+        processRequest(request, response);
     }
 
     /**
