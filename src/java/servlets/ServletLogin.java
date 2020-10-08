@@ -87,8 +87,7 @@ public class ServletLogin extends HttpServlet {
         
         if(url.equals("/EquidaWeb20/connexion"))
         {  
-            Utilisateur unUtilisateur = new Utilisateur();
-            request.setAttribute("pUser", unUtilisateur);
+            
             getServletContext().getRequestDispatcher("/vues/admin/Accueil.jsp").forward(request, response);
         }
     }

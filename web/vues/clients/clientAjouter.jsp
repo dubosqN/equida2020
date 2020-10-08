@@ -30,32 +30,32 @@
         <form action="ajouterClient" method="POST">
             <div class="form-group">
                 <label for="nom">Nom : </label>
-                <input class="form-control" id="nom" type="text" name="nom"  size="30" maxlength="30" >
+                <input class="form-control" id="nom" type="text" name="nom"  size="30" maxlength="30" required>
             </div>
                 
             <div class="form-group">
                 <label for="prenom">Prénom : </label>
-                <input class="form-control" id="prenom"  type="text"  name="prenom" size="30" maxlength="30">      
+                <input class="form-control" id="prenom"  type="text"  name="prenom" size="30" maxlength="30" required>      
             </div>
               
             <div class="form-group">
                 <label for="rue">Rue : </label>
-                <input class="form-control" id="rue"  type="text"  name="rue" size="30" maxlength="50">
+                <input class="form-control" id="rue"  type="text"  name="rue" size="30" maxlength="50" required>
             </div>
                                
             <div class="form-group">
                 <label for="copos">Code postal : </label>
-                <input class="form-control" id="copos"  type="text"  name="copos" size="5" maxlength="5">
+                <input class="form-control" id="copos"  type="text"  name="copos" size="5" maxlength="5" required>
             </div>
                 
             <div class="form-group">    
                 <label for="ville">Ville : </label>
-                <input class="form-control" id="ville"  type="text"  name="ville" size="40" maxlength="40">
+                <input class="form-control" id="ville"  type="text"  name="ville" size="40" maxlength="40" required>
             </div>
                 
             <div class="form-group">    
                 <label for="mail">Mail : </label>
-                <input class="form-control" id="mail"  type="text"  name="mail" size="60" maxlength="60">
+                <input class="form-control" id="mail"  type="email"  name="mail" size="60" maxlength="60" required>
             </div>
                 
             <div class="form-group">    

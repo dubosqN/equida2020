@@ -103,6 +103,11 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletLogin</servlet-name>
+        <url-pattern>/connexion</url-pattern>
+    </servlet-mapping>
+    
 
 
     <session-config>
