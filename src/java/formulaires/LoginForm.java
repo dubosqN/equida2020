@@ -8,8 +8,11 @@ package formulaires;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import modele.CategVente;
 import modele.Cheval;
 import modele.Client;
+import modele.Pays;
+import modele.Role;
 import modele.TypeCheval;
 import modele.Utilisateur;
 
@@ -51,19 +54,23 @@ public class LoginForm {
         }   
     }
     
-    
-    public Utilisateur login( HttpServletRequest request ) {
+    public Utilisateur ajouterUtilisateur(HttpServletRequest request) {
       
         Utilisateur unUtilisateur = new Utilisateur();
-         
-        String username = getDataForm(request, "username");
-        String password = getDataForm(request, "password" );
 
-       
+        String email = getDataForm(request, "mail");
+        String username = getDataForm(request, "user");
+        String password = getDataForm(request, "password");
+        int role = Integer.parseInt(getDataForm(request, "role"));
+         
+      
+        unUtilisateur.setEmail(email);
         unUtilisateur.setUsername(username);
         unUtilisateur.setPassword(password);
-        
+        unUtilisateur.setRole(new Role(role));
+
        
-        return unUtilisateur ;
+        return unUtilisateur;
     }
+
 }

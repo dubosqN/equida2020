@@ -25,7 +25,7 @@
   </head>
 
   <body class="text-center">
-      <form class="form-signin" action="/connexion" method="post">
+      <form class="form-signin" action="/EquidaWeb20/connexion" method="post">
         <div class="container col-3" style="transform: translateY(50%);">
             <img class="mb-4" src="vues/Images/black-head-horse-side-view-with-horsehair.png" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Bienvenue</h1>
@@ -35,9 +35,13 @@
             
             <label for="inputPassword" class="sr-only">Mot de passe</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required>
-      
-            <div class="mb-3"></div>
-      
+            <div class="mb-1"></div>
+            <div>
+                <div style="color: crimson">
+                    <%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%>
+                </div>
+            </div>
+            
             <button class="btn btn-lg btn-outline-success btn-block" type="submit">Se connecter</button>
             <hr class="featurette-divider">
           <p>
