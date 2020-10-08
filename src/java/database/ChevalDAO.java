@@ -88,7 +88,7 @@ public class ChevalDAO {
             // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO CHEVAL ( nom, sexe, prixDepart, SIRE, id_client, id_typeCheval, id_mere, id_pere)\n" +
+            requete=connection.prepareStatement("INSERT INTO cheval ( nom, sexe, prixDepart, SIRE, id_client, id_typeCheval, id_mere, id_pere)\n" +
                     "VALUES (?,?,?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
             requete.setString(1, unCheval.getNom());
             requete.setString(2, unCheval.getSexe());

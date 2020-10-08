@@ -106,22 +106,22 @@ public class ServletConnexion extends HttpServlet {
                 request.getRequestDispatcher("/vues/admin/Admin.jsp").forward(request, response);
             } else if (userRole.equals("employee")) {
                 System.out.println("employee");
-                HttpSession session = request.getSession(); //création de la session
-                session.setAttribute("employee", username); //attribution du role employee pour la session
+                HttpSession session = request.getSession(); 
+                session.setAttribute("employee", username); 
                 request.setAttribute("username", username);
-                request.getRequestDispatcher("/vues/admin/Employee.jsp").forward(request, response);
+                request.getRequestDispatcher("/vues/employee/Employee.jsp").forward(request, response);
             } else if (userRole.equals("acheteur")) {
                 System.out.println("acheteur");
-                HttpSession session = request.getSession(); //création de la session
-                session.setAttribute("acheteur", username); //attribution du role acheteur pour la session
+                HttpSession session = request.getSession(); 
+                session.setAttribute("acheteur", username); 
                 request.setAttribute("username", username);
-                request.getRequestDispatcher("/vues/admin/Acheteur.jsp").forward(request, response);
+                request.getRequestDispatcher("/vues/acheteur/Acheteur.jsp").forward(request, response);
             } else if (userRole.equals("vendeur")) {
                 System.out.println("vendeur");
-                HttpSession session = request.getSession(); //création de la session
-                session.setAttribute("vendeur", username); //attribution du role vendeur pour la session
+                HttpSession session = request.getSession(); 
+                session.setAttribute("vendeur", username); 
                 request.setAttribute("username", username);
-                request.getRequestDispatcher("/vues/admin/Vendeur.jsp").forward(request, response);
+                request.getRequestDispatcher("/vues/vendeur/Vendeur.jsp").forward(request, response);
             } else {
                 System.out.println("Erreur! <" + userRole + ">");
                 request.setAttribute("errMessage", userRole);

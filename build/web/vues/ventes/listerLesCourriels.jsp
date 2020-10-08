@@ -14,6 +14,7 @@
         <title>LISTE DES COURRIELS</title>
     </head>
     <body>
+        vues/Images/black-head-horse-side-view-with-horsehair.png
         <h1>LISTE DES COURRIELS</h1>
          <%
         ArrayList<Courriel> lesCourriels = (ArrayList)request.getAttribute("pLesCourriels");
