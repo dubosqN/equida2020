@@ -90,11 +90,7 @@ public class ServletLogin extends HttpServlet {
         {  
             getServletContext().getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
         }
-        
-        if(url.equals("/EquidaWeb20/admin"))
-        {  
-            getServletContext().getRequestDispatcher("/vues/admin/Admin.jsp").forward(request, response);
-        }
+
 
     }
 

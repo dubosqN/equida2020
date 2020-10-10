@@ -39,7 +39,7 @@ public class VenteDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("SELECT * from vente, categvente, lieu where vente.codeCategVente=categvente.code AND lieu.id = vente.id_lieu;");          
+            requete=connection.prepareStatement("select * from vente, categvente, lieu where vente.codeCategVente=categvente.code and lieu.id = vente.id_lieu and vente.isActive = 1 order by vente.id");          
             //executer la requete
             rs=requete.executeQuery();
             
@@ -86,7 +86,7 @@ public class VenteDAO {
         {
             //preparation de la requete     
             //codeCateg="ETE";
-            requete=connection.prepareStatement("SELECT c.*, p.nom as nomPays, cv.libelle FROM client c, pays p, clientcategvente cc, categVente cv where c.codePays=p.code and cc.codeClient=c.id and cv.code=cc.codeCategVente and codeCategVente= ? ORDER BY c.id");
+            requete=connection.prepareStatement("SELECT c.*, p.nom as nomPays, cv.libelle FROM client c, pays p, clientcategvente cc, categvente cv where c.codePays=p.code and cc.codeClient=c.id and cv.code=cc.codeCategVente and codeCategVente= ? ORDER BY c.id");
             requete.setString(1, codeCateg);
             //executer la requete
             rs=requete.executeQuery();
@@ -163,7 +163,7 @@ public class VenteDAO {
         try
         {
              
-            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, client.nom as nomVendeur, typeCheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, client.nom as nomVendeur, typecheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
             requete.setString(1, idVente);
             
             System.out.println("requete" + requete);
@@ -290,8 +290,5 @@ public class VenteDAO {
     }
 
 }
-//SELECT che.*, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t where che.id_client = c.id and che.id_typeCheval=t.id
-//SELECT che.*, v.id, c.nom as nomVendeur, t.libelle as race FROM client c, cheval che, typecheval t, vente v, vente_typecheval vt where che.id_client = c.id and che.id_typeCheval=t.id and t.id = vt.id_vente and vt.id_vente = v.id and v.id = 210717;
-//SELECT cheval.*, client.nom, typecheval.libelle where cheval.id_client = client.id and cheval.id = lot.id_cheval and lot.id_vente = vente.id and cheval.id_typeCheval = typecheval.id and vente.id = 210717;
 
-//SELECT cheval.nom, typeCheval.libelle as Race, lot.prixDepart as prixDepart, cheval.id_mere as mere, cheval.id_pere as pere FROM cheval, lot, vente, typecheval, client WHERE cheval.id_mere = cheval.id AND cheval.id_pere = cheval.id AND cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = 210717
+//SELECT COUNT(vente.id), categvente.libelle from categvente, vente WHERE categvente.code = vente.codeCategVente GROUP BY categvente.libelle;
