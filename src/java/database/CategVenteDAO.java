@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.CategVente;
 import modele.Client;
+import modele.Lot;
+import modele.Vente;
 /**
  * update 01/10/2020
  * @author DUBOSQ
@@ -28,7 +30,7 @@ public class CategVenteDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from categvente");
+            requete=connection.prepareStatement("select count(vente.id) as nbVente, categvente.code, categvente.libelle, categvente.img_url as url from categvente, vente where categvente.code = vente.codeCategVente and vente.isActive = 1 group by categvente.libelle");
             
             //executer la requete
             rs=requete.executeQuery();
@@ -37,7 +39,11 @@ public class CategVenteDAO {
             while ( rs.next() ) {  
                 CategVente uneCategVente = new CategVente();
                 uneCategVente.setCode(rs.getString("code"));
-                uneCategVente.setLibelle(rs.getString("libelle"));
+                uneCategVente.setLibelle(rs.getString("libelle"));                
+                uneCategVente.setNbVente(rs.getInt("nbVente"));
+                uneCategVente.setImg_url(rs.getString("url"));
+
+                
                 lesCategVentes.add(uneCategVente);
             }
         }   

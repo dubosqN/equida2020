@@ -5,16 +5,19 @@
  */
 package servlets;
 
+import database.CategVenteDAO;
 import database.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modele.CategVente;
 import modele.Utilisateur;
 
 /**
@@ -70,7 +73,7 @@ public class ServletConnexion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -93,6 +96,9 @@ public class ServletConnexion extends HttpServlet {
         unUtilisateur.setPassword(passsword);
 
         UserDAO unUserDAO = new UserDAO();
+        
+        ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+        request.setAttribute("pLesCategVente", lesCategVentes);
 
         try {
             String userRole = unUserDAO.authentification(connection, unUtilisateur);
@@ -101,7 +107,7 @@ public class ServletConnexion extends HttpServlet {
                 System.out.println("admin");
                 HttpSession session = request.getSession(); //création de la session
                 session.setAttribute("admin", username); //attribution du role admin pour la session
-                session.setAttribute("role", username);
+                session.setAttribute("role", userRole);
                 request.setAttribute("username", username);
                 request.getRequestDispatcher("/vues/admin/Admin.jsp").forward(request, response);
             } else if (userRole.equals("employee")) {

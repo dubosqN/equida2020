@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="modele.CategVente"%>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -53,9 +55,58 @@
         </nav>
         <!-- FIN DE LA NAVBAR -->
         
-        
-        
+
+            
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4"><% out.println("Bienvenue, " + session.getAttribute("admin") + "."); %></h1>
+                    <p class="lead"><% out.println("Role: " + session.getAttribute("role") + "."); %></p>
+                </div>
+            </div> 
+                    <% ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVente"); %>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2">
+            <% for (int i = 0; i < lesCategVentes.size(); i++) {
+                CategVente uneCategVente = lesCategVentes.get(i);
+                
+                out.println("<div class='col mb-4' id='wprock-img-zoom-hover'>");
+                out.println("<a href='#' class='text-decoration-none text-dark'>");
+                out.println("<div class='card border-dark mb-5' id='wprock-img-zoom' style='max-width: 30rem;'>");
+                out.println("<img class='card-img-top' id='images' src='vues/Images/"+ uneCategVente.getImg_url() +"' alt='image de la categ' style='max-height : 270px;'>");
+                out.println("<div class='card-body text-dark'>");
+                out.println("<h5 class='card-title'>"+ uneCategVente.getLibelle() +" <span class='badge badge-success float-right'>" + uneCategVente.getNbVente() + " en cours</span></h5>");
+                //out.println("<p></p>");
+                out.println("</div>");
+                out.println("</div>");
+                out.println("</a>");
+                out.println("</div>");              
+                
+            }
+            %>
+            </div>
+        </div>
         <!-- Optional JavaScript -->
+        <style>
+
+             #wprock-img-zoom-hover #wprock-img-zoom {
+                overflow: hidden;
+                position: relative; 
+            }
+            #wprock-img-zoom-hover #wprock-img-zoom img {
+                max-width: 100%;
+                -moz-transition: all 0.8s;
+                -webkit-transition: all 0.8s;
+                transition: all 0.8s;
+            }
+            
+            #wprock-img-zoom-hover:hover #wprock-img-zoom img {
+                -moz-transform: scale(1.06);
+                -webkit-transform: scale(1.06);
+                transform: scale(1.06);
+            }
+
+        </style>
+        
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

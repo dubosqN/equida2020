@@ -6,7 +6,6 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
-        
         <param-value>jdbc:mysql://172.20.0.241/MASTER</param-value>
     </context-param>
     <context-param>
@@ -48,6 +47,10 @@
     <servlet>
         <servlet-name>ServletConnexion</servlet-name>
         <servlet-class>servlets.ServletConnexion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletListeVenteParCateg</servlet-name>
+        <servlet-class>servlets.ServletListeVenteParCateg</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
@@ -113,7 +116,12 @@
         <servlet-name>ServletDeconnexion</servlet-name>
         <url-pattern>/_deconnexion</url-pattern>
     </servlet-mapping>
-
+    <!--
+    <servlet-mapping>
+        <servlet-name>ServletListeVenteParCateg</servlet-name>
+        <url-pattern>/ServletListeVenteParCateg</url-pattern>
+    </servlet-mapping>
+    -->
     <session-config>
         <session-timeout>
             30
