@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 <%@page import="java.util.Date"%>
-=======
 <%@page import="java.util.ArrayList"%>
 <%@page import="modele.CategVente"%>
->>>>>>> 0e0804a76474c740885c56a89f8a1b1d1308f676
 <!doctype html>
 <html lang="fr">
     <head>
@@ -74,7 +71,7 @@
                 CategVente uneCategVente = lesCategVentes.get(i);
                 
                 out.println("<div class='col mb-4' id='wprock-img-zoom-hover'>");
-                out.println("<a href='#' class='text-decoration-none text-dark'>");
+                out.println("<a href ='/EquidaWeb20/admin/ventes?categ="+ uneCategVente.getCode()+"' class='text-decoration-none text-dark'>");
                 out.println("<div class='card border-dark mb-5' id='wprock-img-zoom' style='max-width: 30rem;'>");
                 out.println("<img class='card-img-top' id='images' src='vues/Images/"+ uneCategVente.getImg_url() +"' alt='image de la categ' style='max-height : 270px;'>");
                 out.println("<div class='card-body text-dark'>");
@@ -110,8 +107,6 @@
             }
 
         </style>
-        
->>>>>>> 0e0804a76474c740885c56a89f8a1b1d1308f676
 
         <!-- Optional JavaScript -->
         <script type="text/javascript">

@@ -29,11 +29,6 @@ public class VenteDAO {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    /* @author Zakina - 22/06/2017
-    /* Méthode permettant de lister toutes les ventes enregistrées en base, triées par date décroissante.
-    /* Pour chaque vente, on récupère aussi sa catégorie.
-    /* La liste des vente est stockée dans une ArrayList
-    */
     public static ArrayList<Vente>  getLesVentes(Connection connection){      
         ArrayList<Vente> lesVentes = new  ArrayList<Vente>();
         try
@@ -73,13 +68,48 @@ public class VenteDAO {
             e.printStackTrace();
         }
         return lesVentes ;    
+    }
+        //Methode à modif
+        public static ArrayList<Vente>  getVentesByCateg(Connection connection, String categVente){      
+        ArrayList<Vente> lesVentes = new  ArrayList<Vente>();
+        try
+        {
+ 
+            requete=connection.prepareStatement("select * from vente, categvente, lieu where vente.codeCategVente=categvente.code and lieu.id = vente.id_lieu and vente.isActive = 1 and categvente.code = ? order by vente.id");          
+            requete.setString(1, categVente);
+            rs=requete.executeQuery();
+            
+            while ( rs.next() ) {  
+                Vente uneVente = new Vente();
+                uneVente.setId(rs.getInt("id"));
+                uneVente.setNom(rs.getString("nom"));
+                uneVente.setDateDebutVente(rs.getString("dateDebut"));
+                
+                CategVente uneCateg = new CategVente();
+                uneCateg.setCode(rs.getString("code"));
+                uneCateg.setLibelle(rs.getString("libelle"));
+                
+                uneVente.setUneCategVente(uneCateg);
+                lesVentes.add(uneVente);
+                
+                Lieu unLieu = new Lieu();
+                unLieu.setId(rs.getInt("id"));
+                unLieu.setVille(rs.getString("ville"));
+                unLieu.setNbBoxes(rs.getInt("nbBoxes"));
+                unLieu.setCommentaire(rs.getString("commentaire"));
+                
+                uneVente.setUnLieu(unLieu);
+                
+                
+            }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return lesVentes ;    
     } 
     
-    /* @author Zakina - 22/06/2017
-    /* Méthode permettant de lister les clients interessés par la catégorie de la vente selectionnée (passée en paramètre de la méthode)
-    /* Pour chaque client, on récupère aussi le nom de son pays
-    /* La liste des clients est stockée dans une ArrayList
-    */
     public static ArrayList<Client>  getLesClients(Connection connection, String codeCateg){      
         ArrayList<Client> lesClients = new  ArrayList<Client>();
         try
