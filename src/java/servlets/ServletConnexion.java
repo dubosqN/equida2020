@@ -101,8 +101,7 @@ public class ServletConnexion extends HttpServlet {
                 System.out.println("admin");
                 HttpSession session = request.getSession(); //création de la session
                 session.setAttribute("admin", username); //attribution du role admin pour la session
-                session.setAttribute("role", username);
-                request.setAttribute("username", username);
+                session.setAttribute("role", userRole);
                 request.getRequestDispatcher("/vues/admin/Admin.jsp").forward(request, response);
             } else if (userRole.equals("employee")) {
                 System.out.println("employee");

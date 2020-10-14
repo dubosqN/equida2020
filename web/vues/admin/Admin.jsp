@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -48,15 +49,25 @@
                         </div>
                     </li>
                 </ul>
-                <a href="<%=request.getContextPath()%>/_deconnexion" class="text-dark px-3 text-decoration-none" type="submit">Se deconnecter</a>
+                <a href="#" class="text-info px-3 text-decoration-none">Profil</a>
+                <a href="<%=request.getContextPath()%>/_deconnexion" class="text-danger px-3 text-decoration-none" type="submit">Se deconnecter</a>
             </div>
         </nav>
         <!-- FIN DE LA NAVBAR -->
-        
-        
-        
-        <!-- Optional JavaScript -->
+        <% Date uneDate = new Date(); %>
+        <div class="container">
+            <h1><% out.println("Bienvenue " + session.getAttribute("admin") + ", vous êtes " + session.getAttribute("role") + "."); %> </h1>
+            
+        </div>
 
+        <!-- Optional JavaScript -->
+        <script type="text/javascript">
+            var myVar=setInterval(function () {myTimer()}, 1000);
+            var counter = 0;
+            function myTimer() {
+                document.getElementById("demo").innerHTML = new Date().toISOString().substr(11, 8);;
+            }
+        </script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
