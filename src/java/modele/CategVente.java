@@ -11,6 +11,8 @@ public class CategVente {
     private String libelle ;
     private ArrayList<Client> lesClient ;
     private ArrayList<Vente> lesVentes;
+    private int nbVente;
+    private String img_url;
 
     public CategVente() {
     }
@@ -35,6 +37,26 @@ public class CategVente {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
+
+    public int getNbVente() {
+        return nbVente;
+    }
+
+    public void setNbVente(int nbVente) {
+        this.nbVente = nbVente;
+    }
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+    
+    
+    
+    
     
     /* Ajouter par Noé.D */
     public ArrayList<Client> getLesClient() {
