@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-   <context-param>
+    <context-param>
         <param-name>pilotejdbc</param-name>
         <param-value>com.mysql.jdbc.Driver</param-value>
     </context-param>
@@ -36,7 +36,6 @@
         <servlet-name>action</servlet-name>	
     </filter-mapping>
     -->
-
     <!--  écouteurs -->
     <listener>
         <listener-class>database.InitConnexion</listener-class>
@@ -72,6 +71,10 @@
     <servlet>
         <servlet-name>ServletListeVenteParCateg</servlet-name>
         <servlet-class>servlets.ServletListeVenteParCateg</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAdmin</servlet-name>
+        <servlet-class>servlets.ServletAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
@@ -143,6 +146,19 @@
         <url-pattern>/ServletListeVenteParCateg</url-pattern>
     </servlet-mapping>
     -->
+    <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/Accueil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/ventes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/lots</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

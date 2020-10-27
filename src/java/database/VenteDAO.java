@@ -193,7 +193,7 @@ public class VenteDAO {
         try
         {
              
-            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, client.nom as nomVendeur, typecheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, cheval.img_url, client.nom as nomVendeur, typecheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
             requete.setString(1, idVente);
             
             System.out.println("requete" + requete);
@@ -204,6 +204,7 @@ public class VenteDAO {
                 Cheval unCheval = new Cheval();
                 unCheval.setId(rs.getInt("id"));
                 unCheval.setNom(rs.getString("nom"));
+                unCheval.setImg_url(rs.getString("img_url"));
 
                 Client unClient = new Client();
                 unClient.setId(rs.getInt("id"));  
