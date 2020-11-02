@@ -122,4 +122,17 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     </body>
+    
+    <div class="container p-5">
+        <hr class="featurette-divider p-5">
+        <footer>
+            <p class="float-right">
+                Pablo, Melvyn, Noé.
+            </p>
+            <p>
+                2020 SIO2, Lycée Jean Rostand ·
+                <a href="">Lycée</a>  · 
+            </p>
+        </footer>
+    </div>
 </html>

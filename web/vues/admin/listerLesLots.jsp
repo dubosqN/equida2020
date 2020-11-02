@@ -74,19 +74,19 @@
         <%ArrayList<Cheval> lesChevaux = (ArrayList) request.getAttribute("pLesChevaux");%>
         
         <div class="container">
-            <div class="row row-cols-1 row-cols-md-1">
+            <div class="row row-cols-md-1">
                 <div class="card-deck">
             <% for (int i = 0; i < lesChevaux.size(); i++) {
                 Cheval unCheval = lesChevaux.get(i);
-                out.println("<div class='col mb-4'>");
-                out.println("<div class='card' style='max-width: 10rem;'>"); //
-                out.println("   <img src='../vues/Images/"+ unCheval.getImg_url() +"' class='card-img-top' alt='#'>");
+                out.println("<div class='col mb-3'>");
+                out.println("<div class='card' style='width: 18rem; '>"); //
+                out.println("   <img src='../vues/Images/"+ unCheval.getImg_url() +"' class='card-img-top' alt='#' style='height: 10rem;'>");
                 //out.println("   <img src='../vues/Images/ete.jpg' class='card-img-top' alt='...'>"); //
                 out.println("   <div class='card-body'>");
                 out.println("    <h5 class='card-title'>"+ unCheval.getNom() +"</h5>");
                 out.println("    <p class='card-text'> Vendeur: "+ unCheval.getUnClient().getNom() +"</p>");
                 out.println("    <p class='card-text'> Race: "+ unCheval.getLeTypeDeCheval().getLibelle() +"</p>");
-                out.println("    <a href='/EquidaWeb20/admin/ficheCheval?idCheval="+ unCheval.getId() +"' class='btn btn-primary'>Effectuer une enchère</a>");
+                out.println("    <a href='/EquidaWeb20/admin/ficheCheval?idCheval="+ unCheval.getId() +"' class='btn btn-primary'>Plus d'informations</a>");
                 out.println("   </div>");
                 out.println("</div>");
                 out.println("</div>");
@@ -105,4 +105,15 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     </body>
+    <div class="container p-5">
+        <hr class="featurette-divider p-5">
+        <footer>
+            <p class="float-right">
+                Pablo, Melvyn, Noé.
+            </p>
+            <p>
+                2020 · SIO2 · Lycée Jean Rostand
+            </p>
+        </footer>
+    </div>
 </html>

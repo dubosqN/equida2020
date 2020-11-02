@@ -6,6 +6,7 @@
 package servlets;
 
 import database.CategVenteDAO;
+import database.ChevalDAO;
 import database.UserDAO;
 import database.VenteDAO;
 import java.io.IOException;
@@ -92,6 +93,14 @@ public class ServletAdmin extends HttpServlet {
             ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idVente);
             request.setAttribute("pLesChevaux", lesChevaux);
             getServletContext().getRequestDispatcher("/vues/admin/listerLesLots.jsp").forward(request, response);
+   
+        }
+        
+        if (url.equals(request.getContextPath() + "/admin/ficheCheval")) {
+            String idCheval = (String)request.getParameter("idCheval");
+            Cheval unCheval = VenteDAO.getInfosCheval(connection, idCheval);
+            request.setAttribute("pIdCheval", unCheval);
+            getServletContext().getRequestDispatcher("/vues/admin/ficheCheval.jsp").forward(request, response);
    
         }
     }

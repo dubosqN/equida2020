@@ -158,6 +158,10 @@
         <servlet-name>ServletAdmin</servlet-name>
         <url-pattern>/admin/lots</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/ficheCheval</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>

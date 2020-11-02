@@ -141,8 +141,6 @@ public class ServletVentes extends HttpServlet {
             String idCheval = (String)request.getParameter("idCheval");
 
             Cheval unCheval = VenteDAO.getInfosCheval(connection, idCheval);
-            System.out.println("Cheval:" + unCheval.getId());
-            System.out.println("NB chevaux" +unCheval.getNom());
             request.setAttribute("pIdCheval", unCheval);
             getServletContext().getRequestDispatcher("/vues/ventes/listerInfosCheval.jsp").forward(request, response);
            
