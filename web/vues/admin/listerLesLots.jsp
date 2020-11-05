@@ -1,27 +1,27 @@
 <%-- 
-    Document   : listerLesClients
-    Created on : 22 juin 2017, 10:23:05
-    Author     : Zakina
+    Document   : listerLesLots
+    Created on : 27 oct. 2020, 04:33:13
+    Author     : noedu
 --%>
 
-<%@page import="modele.Client"%>
+<%@page import="modele.Cheval"%>
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-
-
+<html lang="fr">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-
-        <title>LISTE LES CLIENTS POUR UNE CATEGORIE DE VENTE</title>
+        <title>Equida - Accueil</title>
     </head>
     <body>
+
+
         <!-- NAVBAR -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/EquidaWeb20">Accueil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/EquidaWeb20/admin/Accueil">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <!-- Item à ajouter
                     <li class="nav-item">
@@ -53,84 +53,67 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/ajouterCheval">Ajouter Cheval</a>
                             <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/listerCheval">Lister les chevaux</a>
-
+                            
                         </div>
                     </li>
                 </ul>
-                <a href="<%=request.getContextPath()%>/_deconnexion" class="text-dark px-3 text-decoration-none" type="submit">Se deconnecter</a>
+                <a href="#" class="text-info px-3 text-decoration-none">Profil</a>
+                <a href="<%=request.getContextPath()%>/_deconnexion" class="text-danger px-3 text-decoration-none" type="submit">Se deconnecter</a>
             </div>
         </nav>
+        <!-- FIN DE LA NAVBAR -->
 
+            
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4"><% out.println("Bienvenue, " + session.getAttribute("admin") + "."); %></h1>
+                    <p class="lead"><% out.println("Role: " + session.getAttribute("role") + "."); %></p>
+                </div>
+            </div> 
+        
+        <%ArrayList<Cheval> lesChevaux = (ArrayList) request.getAttribute("pLesChevaux");%>
+        
+        <div class="container">
+            <div class="row row-cols-md-1">
+                <div class="card-deck">
+            <% for (int i = 0; i < lesChevaux.size(); i++) {
+                Cheval unCheval = lesChevaux.get(i);
+                out.println("<div class='col mb-3'>");
+                out.println("<div class='card' style='width: 18rem; '>"); //
+                out.println("   <img src='../vues/Images/"+ unCheval.getImg_url() +"' class='card-img-top' alt='#' style='height: 10rem;'>");
+                //out.println("   <img src='../vues/Images/ete.jpg' class='card-img-top' alt='...'>"); //
+                out.println("   <div class='card-body'>");
+                out.println("    <h5 class='card-title'>"+ unCheval.getNom() +"</h5>");
+                out.println("    <p class='card-text'> Vendeur: "+ unCheval.getUnClient().getNom() +"</p>");
+                out.println("    <p class='card-text'> Race: "+ unCheval.getLeTypeDeCheval().getLibelle() +"</p>");
+                out.println("    <a href='/EquidaWeb20/admin/ficheCheval?idCheval="+ unCheval.getId() +"' class='btn btn-primary'>Plus d'informations</a>");
+                out.println("   </div>");
+                out.println("</div>");
+                out.println("</div>");
+                             
+                
 
-        <div class="container-lg">
-            <h1>LISTE DES CLIENTS POUR UNE CATEGORIE DE VENTE</h1>
-            <%
-                ArrayList<Client> lesClients = (ArrayList) request.getAttribute("pLesClients");
-
+            }
             %>
-            <table class="table table-hover table-striped shadow-lg p-3 mb-5 bg-white rounded">  
-                <thead>
-                    <tr>             
-                        <th>ID</th>
-                        <th>NOM</th>
-                        <th>PRENOM</th>
-                        <th>RUE</th>
-                        <th>COPOS</th>
-                        <th>VILLE</th>
-                        <th>MAIL</th>
-                        <th>PAYS</th>                
-                <br>
-                <br>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <%                        for (int i = 0; i < lesClients.size(); i++) {
-
-                                Client unClient = lesClients.get(i);
-                                out.println("<tr><th scope='row'>");
-                                out.println(unClient.getId());
-                                out.println("</a></th>");
-
-                                out.println("<td>");
-                                out.println(unClient.getNom());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getPrenom());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getRue());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getCopos());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getVille());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getMail());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getUnPays().getNom());
-                                out.println("</td>");
-
-                            }
-                        %>
-                    </tr>
-                </tbody>
-            </table>
+            </div>
+            </div>
         </div>
-        <%@include  file="../../footer.html"%>
-        <!-- Optional JavaScript -->
+
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
     </body>
+    <div class="container p-5">
+        <hr class="featurette-divider p-5">
+        <footer>
+            <p class="float-right">
+                Pablo, Melvyn, Noé.
+            </p>
+            <p>
+                2020 · SIO2 · Lycée Jean Rostand
+            </p>
+        </footer>
+    </div>
 </html>

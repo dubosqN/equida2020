@@ -29,11 +29,6 @@ public class VenteDAO {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    /* @author Zakina - 22/06/2017
-    /* Méthode permettant de lister toutes les ventes enregistrées en base, triées par date décroissante.
-    /* Pour chaque vente, on récupère aussi sa catégorie.
-    /* La liste des vente est stockée dans une ArrayList
-    */
     public static ArrayList<Vente>  getLesVentes(Connection connection){      
         ArrayList<Vente> lesVentes = new  ArrayList<Vente>();
         try
@@ -73,13 +68,48 @@ public class VenteDAO {
             e.printStackTrace();
         }
         return lesVentes ;    
+    }
+        //Methode à modif
+        public static ArrayList<Vente>  getVentesByCateg(Connection connection, String categVente){      
+        ArrayList<Vente> lesVentes = new  ArrayList<Vente>();
+        try
+        {
+ 
+            requete=connection.prepareStatement("select * from vente, categvente, lieu where vente.codeCategVente=categvente.code and lieu.id = vente.id_lieu and vente.isActive = 1 and categvente.code = ? order by vente.id");          
+            requete.setString(1, categVente);
+            rs=requete.executeQuery();
+            
+            while ( rs.next() ) {  
+                Vente uneVente = new Vente();
+                uneVente.setId(rs.getInt("id"));
+                uneVente.setNom(rs.getString("nom"));
+                uneVente.setDateDebutVente(rs.getString("dateDebut"));
+                
+                CategVente uneCateg = new CategVente();
+                uneCateg.setCode(rs.getString("code"));
+                uneCateg.setLibelle(rs.getString("libelle"));
+                
+                uneVente.setUneCategVente(uneCateg);
+                lesVentes.add(uneVente);
+                
+                Lieu unLieu = new Lieu();
+                unLieu.setId(rs.getInt("id"));
+                unLieu.setVille(rs.getString("ville"));
+                unLieu.setNbBoxes(rs.getInt("nbBoxes"));
+                unLieu.setCommentaire(rs.getString("commentaire"));
+                
+                uneVente.setUnLieu(unLieu);
+                
+                
+            }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return lesVentes ;    
     } 
     
-    /* @author Zakina - 22/06/2017
-    /* Méthode permettant de lister les clients interessés par la catégorie de la vente selectionnée (passée en paramètre de la méthode)
-    /* Pour chaque client, on récupère aussi le nom de son pays
-    /* La liste des clients est stockée dans une ArrayList
-    */
     public static ArrayList<Client>  getLesClients(Connection connection, String codeCateg){      
         ArrayList<Client> lesClients = new  ArrayList<Client>();
         try
@@ -163,7 +193,7 @@ public class VenteDAO {
         try
         {
              
-            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, client.nom as nomVendeur, typecheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, cheval.img_url, client.nom as nomVendeur, typecheval.libelle as Race, lot.prixDepart as prixDep, cheval.id_mere as mere, cheval.id_pere as pere, client.nom as nomDuVendeur FROM cheval, lot, vente, typecheval, client WHERE cheval.id = lot.id_cheval AND cheval.id_client = client.id AND cheval.id_typeCheval = typecheval.id AND lot.id_vente = vente.id AND vente.id = ?");
             requete.setString(1, idVente);
             
             System.out.println("requete" + requete);
@@ -174,6 +204,7 @@ public class VenteDAO {
                 Cheval unCheval = new Cheval();
                 unCheval.setId(rs.getInt("id"));
                 unCheval.setNom(rs.getString("nom"));
+                unCheval.setImg_url(rs.getString("img_url"));
 
                 Client unClient = new Client();
                 unClient.setId(rs.getInt("id"));  
@@ -205,7 +236,7 @@ public class VenteDAO {
         try
         {
               unCheval = new Cheval();
-            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, typecheval.libelle as Race, chevalPere.nom as pere, chevalMere.nom as mere, client.nom as nomVendeur FROM client, cheval, typecheval, cheval chevalPere, cheval chevalMere WHERE cheval.id_typeCheval = typecheval.id AND cheval.id_pere = chevalPere.id AND cheval.id_mere = chevalMere.id AND cheval.id_client = client.id AND cheval.id = ?");
+            requete=connection.prepareStatement("SELECT cheval.*, typecheval.libelle as Race, chevalPere.nom as pere, chevalMere.nom as mere, client.nom as nomVendeur FROM client, cheval, typecheval, cheval chevalPere, cheval chevalMere WHERE cheval.id_typeCheval = typecheval.id AND cheval.id_pere = chevalPere.id AND cheval.id_mere = chevalMere.id AND cheval.id_client = client.id AND cheval.id = ?");
             requete.setInt(1, Integer.parseInt(idCheval));
             
             System.out.println("requete" + requete);
@@ -216,6 +247,9 @@ public class VenteDAO {
                 
                 
                 unCheval.setId(rs.getInt("id"));
+                unCheval.setNom(rs.getString("nom"));
+                unCheval.setSexe(rs.getString("sexe"));
+                unCheval.setImg_url(rs.getString("img_url"));
                
                 Cheval unChevalPere = new Cheval();
                 unChevalPere.setNom(rs.getString("pere"));

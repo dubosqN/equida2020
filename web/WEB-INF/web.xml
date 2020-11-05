@@ -6,16 +6,36 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
-        <param-value>jdbc:mysql://172.20.0.241/MASTER</param-value>
+        <param-value>jdbc:mysql://localhost:3306/master</param-value>
     </context-param>
     <context-param>
         <param-name>utilisateurjdbc</param-name>
-        <param-value>ADM_MASTER</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param> 
         <param-name>motdepassejdbc</param-name>
-        <param-value>mpMaster</param-value>
+        <param-value/>
     </context-param>
+    <!--  Filtres 
+    <filter>
+        <filter-name>ServletFilter</filter-name>
+        <filter-class>servlets.ServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/EquidaWeb20/*</url-pattern>
+    </filter-mapping>
+    
+        <filter>
+        <filter-name>ServletFilter</filter-name>
+        <filter-class>servlets.ServletFilter</filter-class>
+    </filter>
+ 
+    <filter-mapping>
+        <filter-name>ServletFilter</filter-name>
+        <servlet-name>action</servlet-name>	
+    </filter-mapping>
+    -->
     <!--  écouteurs -->
     <listener>
         <listener-class>database.InitConnexion</listener-class>
@@ -51,6 +71,10 @@
     <servlet>
         <servlet-name>ServletListeVenteParCateg</servlet-name>
         <servlet-class>servlets.ServletListeVenteParCateg</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAdmin</servlet-name>
+        <servlet-class>servlets.ServletAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
@@ -122,6 +146,23 @@
         <url-pattern>/ServletListeVenteParCateg</url-pattern>
     </servlet-mapping>
     -->
+    <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/Accueil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/ventes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/lots</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>ServletAdmin</servlet-name>
+        <url-pattern>/admin/ficheCheval</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
