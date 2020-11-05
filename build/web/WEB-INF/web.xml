@@ -12,7 +12,7 @@
         <param-name>utilisateurjdbc</param-name>
         <param-value>root</param-value>
     </context-param>
-    <context-param> 
+    <context-param>
         <param-name>motdepassejdbc</param-name>
         <param-value/>
     </context-param>
@@ -75,6 +75,14 @@
     <servlet>
         <servlet-name>ServletAdmin</servlet-name>
         <servlet-class>servlets.ServletAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAcheteur</servlet-name>
+        <servlet-class>servlets.ServletAcheteur</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletVendeur</servlet-name>
+        <servlet-class>servlets.ServletVendeur</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
@@ -158,11 +166,30 @@
         <servlet-name>ServletAdmin</servlet-name>
         <url-pattern>/admin/lots</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletAdmin</servlet-name>
         <url-pattern>/admin/ficheCheval</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ServletAcheteur</servlet-name>
+        <url-pattern>/acheteur/Accueil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAcheteur</servlet-name>
+        <url-pattern>/acheteur/ventes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAcheteur</servlet-name>
+        <url-pattern>/acheteur/lots</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAcheteur</servlet-name>
+        <url-pattern>/acheteur/ficheCheval</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVendeur</servlet-name>
+        <url-pattern>/ServletVendeur</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

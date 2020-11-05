@@ -79,7 +79,7 @@
                         <th>DATE DEBUT</th>
                         <th>CATEGORIE</th>
                         <th>VILLE</th>
-                        <th>Boxes</th>  
+                        <th>Boxes</th>
                         <th>CLIENTS</th>
                         <th>MAILS</th>
                         <th>LOTS</th>
@@ -116,7 +116,7 @@
                                 out.println("<td> ");
                                 out.println(uneVente.getUnLieu().getNbBoxes());
                                 out.println("</td>");
-
+                                
                                 out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat=" + uneVente.getUneCategVente().getCode() + "'>");
                                 out.println("Lister les clients interessés");
                                 out.println("</td>");
