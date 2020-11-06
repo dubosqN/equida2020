@@ -63,7 +63,7 @@ public final class categorieConsulter_jsp extends org.apache.jasper.runtime.Http
       out.write("        \n");
       out.write("         ");
 
-        CategVente uneCategVente = (CategVente)request.getAttribute("pCategVente");
+        CategVente uneCategVente = (CategVente)request.getAttribute("pCategorie");
         
       out.write("\n");
       out.write("        \n");

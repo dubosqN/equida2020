@@ -5,8 +5,9 @@
  */
 package servlets;
 
+import com.sun.org.apache.xml.internal.resolver.Catalog;
 import database.CategVenteDAO;
-import database.UserDAO;
+import database.VenteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,24 +17,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import modele.CategVente;
-import modele.Utilisateur;
+import modele.Cheval;
+import modele.Vente;
 
 /**
  *
- * @author noedu
+ * @author sio2
  */
-public class ServletConnexion extends HttpServlet {
+public class ServletAcheteur extends HttpServlet {
 
-    Connection connection;
-
+       Connection connection;
+    
     @Override
     public void init() {
         ServletContext servletContext = getServletContext();
         connection = (Connection) servletContext.getAttribute("connection");
     }
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,7 +43,6 @@ public class ServletConnexion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -52,10 +51,10 @@ public class ServletConnexion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletConnexion</title>");            
+            out.println("<title>Servlet ServletAcheteur</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServletConnexion at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServletAcheteur at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,7 +72,39 @@ public class ServletConnexion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        String url = request.getRequestURI();
+        if (url.equals(request.getContextPath() + "/acheteur/Accueil")) {
+            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+            request.setAttribute("pLesCategVente", lesCategVentes);
+                    
+            this.getServletContext().getRequestDispatcher("/vues/acheteur/Acheteur.jsp").forward(request, response);
+        }
+        
+        if (url.equals(request.getContextPath() + "/acheteur/ventes")) {
+            String codeCat = (String)request.getParameter("categ");
+            ArrayList<Vente> lesVentes = VenteDAO.getVentesByCateg(connection, codeCat);
+            request.setAttribute("pLesVentes", lesVentes);
+            getServletContext().getRequestDispatcher("/vues/acheteur/listerLesVentesParCateg.jsp").forward(request, response);
+        }
+        
+        if (url.equals(request.getContextPath() + "/acheteur/lots")) {
+            String idVente = (String)request.getParameter("idVente");
+            ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idVente);
+            request.setAttribute("pLesChevaux", lesChevaux);
+            getServletContext().getRequestDispatcher("/vues/acheteur/listerLesLots.jsp").forward(request, response);
+   
+        }
+        
+        if (url.equals(request.getContextPath() + "/acheteur/ficheCheval")) {
+            String idCheval = (String)request.getParameter("idCheval");
+            Cheval unCheval = VenteDAO.getInfosCheval(connection, idCheval);
+            //Lot unLot = ;
+            request.setAttribute("pIdCheval", unCheval);
+            //request.setAttribute("pIdLot", unLot);
+            getServletContext().getRequestDispatcher("/vues/acheteur/ficheCheval.jsp").forward(request, response);
+   
+        }
     }
 
     /**
@@ -87,57 +118,7 @@ public class ServletConnexion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String passsword = request.getParameter("password");
-
-        Utilisateur unUtilisateur = new Utilisateur();
-
-        unUtilisateur.setUsername(username);
-        unUtilisateur.setPassword(passsword);
-
-        UserDAO unUserDAO = new UserDAO();
-       
-//        ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-//        request.setAttribute("pLesCategVente", lesCategVentes);
-
-        try {
-            String userRole = unUserDAO.authentification(connection, unUtilisateur);
-
-            if (userRole.equals("admin")) {
-                System.out.println("admin");
-                HttpSession session = request.getSession(); //création de la session
-                session.setAttribute("admin", username); //attribution du role admin pour la session
-                session.setAttribute("role", userRole);
-                response.sendRedirect(request.getContextPath() + "/admin/Accueil");
-
-            } else if (userRole.equals("employee")) {
-                System.out.println("employee");
-                HttpSession session = request.getSession(); 
-                session.setAttribute("employee", username); 
-                request.setAttribute("username", username);
-                request.getRequestDispatcher("/vues/employee/Employee.jsp").forward(request, response);
-            } else if (userRole.equals("acheteur")) {
-                System.out.println("acheteur");
-                HttpSession session = request.getSession(); 
-                session.setAttribute("acheteur", username); 
-                request.setAttribute("username", username);
-                response.sendRedirect(request.getContextPath() + "/acheteur/Accueil");
-            } else if (userRole.equals("vendeur")) {
-                System.out.println("vendeur");
-                HttpSession session = request.getSession(); 
-                session.setAttribute("vendeur", username); 
-                request.setAttribute("username", username);
-                response.sendRedirect(request.getContextPath() + "/vendeur/Accueil");
-            } else {
-                System.out.println("Erreur! <" + userRole + ">");
-                request.setAttribute("errMessage", userRole);
-
-                request.getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        processRequest(request, response);
     }
 
     /**
