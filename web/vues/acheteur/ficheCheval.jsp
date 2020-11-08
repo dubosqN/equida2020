@@ -4,6 +4,15 @@
     Author     : noedu
 --%>
 
+<%@page import="java.util.concurrent.TimeUnit"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.Clock"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="modele.Vente"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.time.LocalTime"%>
+<%@page import="java.time.LocalDate"%>
 <%@page import="modele.Cheval"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -75,6 +84,7 @@
         <div class="container-lg">
             <%
                 Cheval unCheval = (Cheval) request.getAttribute("pIdCheval");
+                Vente uneVente = (Vente) request.getAttribute("pIdVente");
             %>
             <form action="<============================================================>">
             <div class="card mb-3" style="max-width: 1110px;">
@@ -183,10 +193,10 @@
                                        <input type="text" class="form-control" placeholder="Montant" required>
                                    </div>
                                </div>
-                               <div class="col-sm-7"></div>
-                                <div class="col-sm-1">
+                               <div class="col-sm-1"></div>
+                                <div class="col-sm-7">
                                     <div class="alert alert-warning float-right" role="alert">
-                                        <h5>24h00</h5>
+                                        <h5 id="countdown"></h5>
                                     </div>
                                 </div>
                             </div>
@@ -195,9 +205,34 @@
                 </div>
             </div>
         </form>
-
+                          
     </div>
     <!-- Optional JavaScript -->
+    <% System.out.println("Restant:" + uneVente.getTempsRestant(uneVente.getHeureVente())); %>
+        <script>
+        var upgradeTime = <% out.println(uneVente.getTempsRestant(uneVente.getHeureVente())); %>
+        var seconds = upgradeTime;
+        function timer() {
+          var days        = Math.floor(seconds/24/60/60);
+          var hoursLeft   = Math.floor((seconds) - (days*86400));
+          var hours       = Math.floor(hoursLeft/3600);
+          var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+          var minutes     = Math.floor(minutesLeft/60);
+          var remainingSeconds = seconds % 60;
+          function pad(n) {
+            return (n < 10 ? "0" + n : n);
+          }
+          
+            document.getElementById('countdown').innerHTML = pad(days) + ":" + pad(hours) + ":" + pad(minutes) + ":" + pad(remainingSeconds);
+              seconds--;
+          }
+        if (seconds > 0){
+            var countdownTimer = setInterval('timer()', 1000);
+        }
+        else{
+            document.getElementById('countdown').innerHTML = "Cette vente est terminée !";
+        }
+        </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

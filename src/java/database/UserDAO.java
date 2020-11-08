@@ -69,6 +69,7 @@ public class UserDAO {
             requete.setString(2, unUtilisateur.getEmail());
             requete.setString(3, unUtilisateur.getPassword());
             requete.setInt(4, unUtilisateur.getRole().getId());
+            //requete.setInt(5, unUtilisateur.getId_client());
 
             requete.executeUpdate();
             System.out.println("query:" + requete);
@@ -76,6 +77,7 @@ public class UserDAO {
             while ( rs.next() ) {
                 idGenere = rs.getInt( 1 );
                 unUtilisateur.setId(idGenere);
+                //unUtilisateur.setId_client(idGenere);
             }
             
         }   

@@ -92,6 +92,7 @@ public class ServletAcheteur extends HttpServlet {
             String idVente = (String)request.getParameter("idVente");
             ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idVente);
             request.setAttribute("pLesChevaux", lesChevaux);
+            request.setAttribute("pIdVente", idVente);
             getServletContext().getRequestDispatcher("/vues/acheteur/listerLesLots.jsp").forward(request, response);
    
         }
@@ -99,8 +100,15 @@ public class ServletAcheteur extends HttpServlet {
         if (url.equals(request.getContextPath() + "/acheteur/ficheCheval")) {
             String idCheval = (String)request.getParameter("idCheval");
             Cheval unCheval = VenteDAO.getInfosCheval(connection, idCheval);
-            //Lot unLot = ;
             request.setAttribute("pIdCheval", unCheval);
+            
+            String idVente = (String)request.getParameter("idVente");
+                    //request.getParameter("idVente");
+            Vente uneVente = VenteDAO.getUneVente(connection, idVente);
+            request.setAttribute("pIdVente", uneVente);
+            //Lot unLot = ;
+            
+            
             //request.setAttribute("pIdLot", unLot);
             getServletContext().getRequestDispatcher("/vues/acheteur/ficheCheval.jsp").forward(request, response);
    

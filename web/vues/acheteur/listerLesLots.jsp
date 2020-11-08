@@ -70,7 +70,9 @@
                 </div>
             </div> 
         
-        <%ArrayList<Cheval> lesChevaux = (ArrayList) request.getAttribute("pLesChevaux");%>
+        <%ArrayList<Cheval> lesChevaux = (ArrayList) request.getAttribute("pLesChevaux");
+        String idVente = (String)request.getAttribute("pIdVente");
+        %>
         
         <div class="container">
             <div class="row row-cols-md-1">
@@ -85,7 +87,7 @@
                 out.println("    <h5 class='card-title'>"+ unCheval.getNom() +"</h5>");
                 out.println("    <p class='card-text'> Vendeur: "+ unCheval.getUnClient().getNom() +"</p>");
                 out.println("    <p class='card-text'> Race: "+ unCheval.getLeTypeDeCheval().getLibelle() +"</p>");
-                out.println("    <a href='/EquidaWeb20/acheteur/ficheCheval?idCheval="+ unCheval.getId() +"' class='btn btn-primary'>Plus d'informations</a>");
+                out.println("    <a href='/EquidaWeb20/acheteur/ficheCheval?idCheval="+ unCheval.getId() +"&idVente="+ idVente +"' class='btn btn-primary'>Plus d'informations</a>");
                 out.println("   </div>");
                 out.println("</div>");
                 out.println("</div>");

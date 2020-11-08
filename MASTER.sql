@@ -528,6 +528,15 @@ INSERT INTO `vente_typecheval` (`id_vente`, `id_typeCheval`) VALUES
 (210717, 1),
 (250217, 2);
 
+
+CREATE TABLE ENCHERE(
+  id int(11),
+  id_lot int(11),
+  prix int(11),
+  dateEnchere datetime,
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Contraintes pour les tables déchargées
 --
