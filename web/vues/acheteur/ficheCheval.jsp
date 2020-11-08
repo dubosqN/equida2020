@@ -4,6 +4,7 @@
     Author     : noedu
 --%>
 
+<%@page import="modele.Lot"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.time.Clock"%>
@@ -85,8 +86,9 @@
             <%
                 Cheval unCheval = (Cheval) request.getAttribute("pIdCheval");
                 Vente uneVente = (Vente) request.getAttribute("pIdVente");
+                Lot unLot = (Lot) request.getAttribute("pIdLot");
             %>
-            <form action="<============================================================>">
+            <form action="<%=request.getContextPath()%>/acheteur/encherir" method="post">
             <div class="card mb-3" style="max-width: 1110px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -186,11 +188,18 @@
                                 </thead>
                             </table>
                            <div class="row">
-                               <div class="col-sm-4"><div class="input-group mb-3">
+                               <div class="col-sm-4">
+                                   <div class="input-group mb-3">
                                        <div class="input-group-prepend">
                                            <button class="btn btn-outline-success" type="submit" id="encherir" >Enchérir</button>
                                        </div>
-                                       <input type="text" class="form-control" placeholder="Montant" required>
+                                       <input name="montant" type="text" class="form-control" placeholder="Montant" required>
+                                       <input name = "idLot" type="hidden" value="<% out.println(unLot.getId()); %>">
+                                          <div>
+                                              <div style="color: crimson">
+                                                  <%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%>
+                                              </div>
+                                          </div>
                                    </div>
                                </div>
                                <div class="col-sm-1"></div>

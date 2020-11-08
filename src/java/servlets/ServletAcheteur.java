@@ -7,6 +7,9 @@ package servlets;
 
 import com.sun.org.apache.xml.internal.resolver.Catalog;
 import database.CategVenteDAO;
+import database.ClientDAO;
+import database.LotDAO;
+import database.PaysDAO;
 import database.VenteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modele.CategVente;
 import modele.Cheval;
+import modele.Enchere;
 import modele.Vente;
+import formulaires.EnchereForm;
+import modele.Client;
+import modele.Lot;
+import modele.Pays;
 
 /**
  *
@@ -90,9 +98,12 @@ public class ServletAcheteur extends HttpServlet {
         
         if (url.equals(request.getContextPath() + "/acheteur/lots")) {
             String idVente = (String)request.getParameter("idVente");
+            request.setAttribute("pIdVente", idVente);
+            
             ArrayList<Cheval> lesChevaux = VenteDAO.getLesChevaux(connection, idVente);
             request.setAttribute("pLesChevaux", lesChevaux);
-            request.setAttribute("pIdVente", idVente);
+
+            
             getServletContext().getRequestDispatcher("/vues/acheteur/listerLesLots.jsp").forward(request, response);
    
         }
@@ -103,15 +114,21 @@ public class ServletAcheteur extends HttpServlet {
             request.setAttribute("pIdCheval", unCheval);
             
             String idVente = (String)request.getParameter("idVente");
-                    //request.getParameter("idVente");
             Vente uneVente = VenteDAO.getUneVente(connection, idVente);
             request.setAttribute("pIdVente", uneVente);
-            //Lot unLot = ;
+                        
             
-            
-            //request.setAttribute("pIdLot", unLot);
+            Lot unLot = LotDAO.getLotByIdCheval(connection, idCheval, idVente);
+            request.setAttribute("pIdLot", unLot);
+            System.out.println("IDLOT ======" + unLot.getId());
+
             getServletContext().getRequestDispatcher("/vues/acheteur/ficheCheval.jsp").forward(request, response);
    
+        }
+        
+        if (url.equals(request.getContextPath() + "/acheteur/encherir")){
+            
+            
         }
     }
 
@@ -126,7 +143,23 @@ public class ServletAcheteur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        EnchereForm form = new EnchereForm();
+        Enchere uneEnchere = form.ajouterEnchere(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute("form", form);
+        request.setAttribute("pEnchere", uneEnchere);
+		
+        if (form.getErreurs().isEmpty()){
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+            LotDAO.encherirSurUnLot(connection, uneEnchere);
+            this.getServletContext().getRequestDispatcher("/acheteur/enchereRecap.jsp" ).forward( request, response );
+        }
+        else {
+            request.setAttribute("errMessage", "Verifier le montant de l'enchère");
+            request.getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
+        }
     }
 
     /**

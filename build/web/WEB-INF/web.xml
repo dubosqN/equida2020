@@ -187,9 +187,21 @@
         <url-pattern>/acheteur/ficheCheval</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletAcheteur</servlet-name>
+        <url-pattern>/acheteur/encherir</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAcheteur</servlet-name>
+        <url-pattern>/acheteur/enchereRecap</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet-mapping>
         <servlet-name>ServletVendeur</servlet-name>
         <url-pattern>/ServletVendeur</url-pattern>
     </servlet-mapping>
+    
+    
     <session-config>
         <session-timeout>
             30
