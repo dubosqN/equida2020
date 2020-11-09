@@ -5,13 +5,10 @@
  */
 package database;
 
-import static database.ChevalDAO.rs;
-import static database.ClientDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import modele.Client;
 import modele.Utilisateur;
 
 /**

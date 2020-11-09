@@ -9,7 +9,7 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /**
- * update 01/10/2020
+ * 
  * @author DUBOSQ
  */
 public class Vente {

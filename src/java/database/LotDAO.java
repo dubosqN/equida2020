@@ -5,26 +5,19 @@
  */
 package database;
 
-import static database.ClientDAO.requete;
-import static database.UserDAO.requete;
-import static database.VenteDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import modele.Cheval;
-import modele.Client;
 import modele.Enchere;
 import modele.Lot;
-import modele.Pays;
-import modele.TypeCheval;
-import modele.Utilisateur;
+
 
 /**
  *
- * @author noedu
+ * @author Dubosq 
  */
+
 public class LotDAO {
         Connection connection=null;
     static PreparedStatement requete=null;

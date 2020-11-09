@@ -205,6 +205,8 @@
                           
     </div>
     <!-- Optional JavaScript -->
+    
+    <!-- Script pour concatenner le temps en secondes, puis le remettre en J/H/M/S -->
     <% System.out.println("Restant:" + uneVente.getTempsRestant(uneVente.getHeureVente())); %>
         <script>
         var upgradeTime = <% out.println(uneVente.getTempsRestant(uneVente.getHeureVente())); %>

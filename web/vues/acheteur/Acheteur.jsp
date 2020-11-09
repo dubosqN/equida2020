@@ -73,6 +73,7 @@
             </div>
         </div>
         <!-- Optional JavaScript -->
+        <!-- Style pour le petit zoom sur les images -->
         <style>
 
              #wprock-img-zoom-hover #wprock-img-zoom {
@@ -95,13 +96,7 @@
         </style>
 
         <!-- Optional JavaScript -->
-        <script type="text/javascript">
-            var myVar=setInterval(function () {myTimer()}, 1000);
-            var counter = 0;
-            function myTimer() {
-                document.getElementById("demo").innerHTML = new Date().toISOString().substr(11, 8);;
-            }
-        </script>
+        
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

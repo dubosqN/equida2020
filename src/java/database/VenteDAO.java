@@ -3,7 +3,6 @@ package database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.CategVente;
@@ -18,9 +17,10 @@ import modele.TypeCheval;
 import modele.Vente;
 
 /**
- * update 01/10/2020
- * @author DUBOSQ
+ *
+ * @author Dubosq
  */
+
 public class VenteDAO {
 
 

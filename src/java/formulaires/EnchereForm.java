@@ -8,11 +8,8 @@ package formulaires;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import modele.CategVente;
-import modele.Client;
 import modele.Enchere;
 import modele.Lot;
-import modele.Pays;
 
 /**
  *

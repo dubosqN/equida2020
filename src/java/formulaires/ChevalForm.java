@@ -1,18 +1,15 @@
 package formulaires;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import modele.CategVente;
 import modele.Cheval;
 import modele.Client;
-import modele.Pays;
 import modele.TypeCheval;
 
 /**
- *
- * @author Zakina
+ * 
+ * @author DUBOSQ
  */
 public class ChevalForm {
     

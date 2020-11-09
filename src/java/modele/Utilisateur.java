@@ -6,8 +6,8 @@
 package modele;
 
 /**
- *
- * @author sio2
+ * 
+ * @author DUBOSQ
  */
 public class Utilisateur {
     private int id;

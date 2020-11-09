@@ -5,11 +5,8 @@
  */
 package servlets;
 
-import com.sun.org.apache.xml.internal.resolver.Catalog;
 import database.CategVenteDAO;
-import database.ClientDAO;
 import database.LotDAO;
-import database.PaysDAO;
 import database.VenteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,17 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modele.CategVente;
 import modele.Cheval;
-import modele.Enchere;
 import modele.Vente;
 import formulaires.EnchereForm;
-import modele.Client;
 import modele.Lot;
-import modele.Pays;
 import modele.Enchere;
 
 /**
- *
- * @author sio2
+ * 
+ * @author DUBOSQ
  */
 public class ServletAcheteur extends HttpServlet {
 

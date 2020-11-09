@@ -5,8 +5,6 @@
  */
 package database;
 
-import static database.ClientDAO.requete;
-import static database.VenteDAO.rs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,13 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.Cheval;
 import modele.Client;
-import modele.Pays;
 import modele.TypeCheval;
 
 /**
- * update 01/10/2020
- * @author DUBOSQ
+ *
+ * @author Dubosq
  */
+
 public class ChevalDAO {
     
     Connection connection=null;

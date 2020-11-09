@@ -8,17 +8,12 @@ package formulaires;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import modele.CategVente;
-import modele.Cheval;
-import modele.Client;
-import modele.Pays;
 import modele.Role;
-import modele.TypeCheval;
 import modele.Utilisateur;
 
 /**
- *
- * @author sio2
+ * 
+ * @author DUBOSQ
  */
 public class LoginForm {
     private String resultat;
