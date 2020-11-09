@@ -37,7 +37,6 @@ public class EnchereForm {
     public void setErreurs(Map<String, String> erreurs) {
         this.erreurs = erreurs;
     }
- 
     
     private static String getDataForm( HttpServletRequest request, String nomChamp ) {
         String valeur = request.getParameter( nomChamp );

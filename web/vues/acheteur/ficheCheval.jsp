@@ -1,9 +1,10 @@
 <%-- 
-    Document   : listerLesLots
+    Document   : ficheCheval
     Created on : 27 oct. 2020, 04:33:13
     Author     : noedu
 --%>
 
+<%@page import="modele.Enchere"%>
 <%@page import="modele.Lot"%>
 <%@page import="java.util.concurrent.TimeUnit"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -48,24 +49,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/EquidaWeb20/acheteur/Accueil">Accueil <span class="sr-only">(current)</span></a>
                     </li>
-                    <!-- Item à ajouter
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Items</a>
-                    </li>
-                    -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Outils
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletVentes/listerLesVentes">Lister les ventes</a>
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletClient/ajouterClient">Ajouter un client</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/ajouterCheval">Ajouter Cheval</a>
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/listerCheval">Lister les chevaux</a>
-
-                        </div>
-                    </li>
                 </ul>
                 <a href="#" class="text-info px-3 text-decoration-none">Profil</a>
                 <a href="<%=request.getContextPath()%>/_deconnexion" class="text-danger px-3 text-decoration-none" type="submit">Se deconnecter</a>
@@ -87,6 +70,8 @@
                 Cheval unCheval = (Cheval) request.getAttribute("pIdCheval");
                 Vente uneVente = (Vente) request.getAttribute("pIdVente");
                 Lot unLot = (Lot) request.getAttribute("pIdLot");
+                Enchere uneEnchere = (Enchere) request.getAttribute("pMontantEnchere");
+            
             %>
             <form action="<%=request.getContextPath()%>/acheteur/encherir" method="post">
             <div class="card mb-3" style="max-width: 1110px;">
@@ -100,7 +85,7 @@
                         <div class="card-body">
                             <table class="table table-borderless">
                                 <thead>
-                                    <span class='badge badge-danger float-right'> Prix actuel : <% %> €</span> 
+                                    <span class='badge badge-danger float-right'> Prix actuel : <% out.println(uneEnchere.getMontant()); %> €</span> 
                                     <tr>
                                         <th><h5 class="card-title">Nom</h5></th>
                                         <td><p class="card-text">
@@ -119,7 +104,7 @@
                                         <th><h5 class="card-title">Prix de départ</h5></th>
                                         <td><p class="card-text">
                                                 <%
-                                                    out.println("<td class='align-middle'>"+ unCheval.getPrixDepart() +"</td>");
+                                                    out.println("<td class='align-middle'>"+ unLot.getPrixDepart() +"€</td>");
                                                 %>
                                             </p></td>
                                         <th><h5 class="card-title">Race</h5></th>
@@ -191,15 +176,18 @@
                                <div class="col-sm-4">
                                    <div class="input-group mb-3">
                                        <div class="input-group-prepend">
-                                           <button class="btn btn-outline-success" type="submit" id="encherir" >Enchérir</button>
-                                       </div>
-                                       <input name="montant" type="text" class="form-control" placeholder="Montant" required>
+                                           <% 
+                                               if(uneVente.getTempsRestant(uneVente.getHeureVente()).equals("0")){
+                                                   System.out.println("Plus de temps vente !");
+                                                   out.println("</div>");
+                                               } 
+                                               else {
+                                                   out.println("<button class='btn btn-outline-success' type='submit' id='encherir' >Enchérir</button>");
+                                                   out.println("</div>");
+                                                   out.println("<input name='montant' type='text' maxlength='6' class='form-control' placeholder='Montant' required>");
+                                               }
+                                           %>
                                        <input name = "idLot" type="hidden" value="<% out.println(unLot.getId()); %>">
-                                          <div>
-                                              <div style="color: crimson">
-                                                  <%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%>
-                                              </div>
-                                          </div>
                                    </div>
                                </div>
                                <div class="col-sm-1"></div>

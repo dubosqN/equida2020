@@ -6,6 +6,7 @@
 package database;
 
 import static database.ClientDAO.requete;
+import static database.UserDAO.requete;
 import static database.VenteDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +19,7 @@ import modele.Enchere;
 import modele.Lot;
 import modele.Pays;
 import modele.TypeCheval;
+import modele.Utilisateur;
 
 /**
  *
@@ -85,5 +87,54 @@ public class LotDAO {
             //out.println("Erreur lors de l’établissement de la connexion");
         }
         return uneEnchere ;    
+    }
+     
+    public static Enchere prixActuel(Connection connection, int idLot){
+        Enchere uneEnchere = null;
+        try {
+            uneEnchere = new Enchere();
+            requete = connection.prepareStatement("select enchere.dateEnchere, max(enchere.montant) as montantMax from enchere, lot where enchere.id_lot = lot.id and lot.id = ?");
+            requete.setInt(1, idLot);
+            
+            rs=requete.executeQuery();
+            while ( rs.next() ) {
+                //System.out.println(":" + uneEnchere.getId());
+                uneEnchere.setDateEnchere(rs.getString("dateEnchere"));
+                uneEnchere.setMontant(rs.getInt("montantMax"));
+
+                }
+        } catch (Exception e) {
+        
+        }
+            return uneEnchere;
+    
+    }
+    
+    public String verifEnchere(Connection connection, Enchere uneEnchere, int idLot){
+        int montant = uneEnchere.getMontant();
+
+        
+        int montantDB;
+        String validation = "";
+        
+        try {
+            requete = connection.prepareStatement("SELECT SELECT MAX(enchere.montant) as maxMontant from enchere, lot where enchere.id_lot = ?");
+            rs = requete.executeQuery();
+            
+            while (rs.next()) {
+                montantDB = rs.getInt("maxMontant");
+
+                if (montant > 999999) {
+                    return "Le montant ne peut pas être supérieur à 999.999€.";
+                } else if (montant < montantDB) {
+                    return "Le montant saisie doit être supérieur au prix actuel";
+                }
+            }
+          
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return "Erreur de montant";
     }
 }

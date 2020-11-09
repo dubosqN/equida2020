@@ -1,3 +1,8 @@
+<%-- 
+    Document   : Acheteur
+    Created on : 27 oct. 2020, 02:31:49
+    Author     : noedu
+--%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modele.CategVente"%>
@@ -32,24 +37,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/EquidaWeb20/acheteur/Accueil">Accueil <span class="sr-only">(current)</span></a>
                     </li>
-                    <!-- Item à ajouter
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Items</a>
-                    </li>
-                    -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Outils
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletVentes/listerLesVentes">Lister les ventes</a>
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletClient/ajouterClient">Ajouter un client</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/ajouterCheval">Ajouter Cheval</a>
-                            <a class="dropdown-item" href="/EquidaWeb20/ServletCheval/listerCheval">Lister les chevaux</a>
-                            
-                        </div>
-                    </li>
                 </ul>
                 <a href="#" class="text-info px-3 text-decoration-none">Profil</a>
                 <a href="<%=request.getContextPath()%>/_deconnexion" class="text-danger px-3 text-decoration-none" type="submit">Se deconnecter</a>
@@ -74,7 +61,7 @@
                 out.println("<div class='card border-dark mb-5' id='wprock-img-zoom' style='max-width: 30rem;'>");
                 out.println("<img class='card-img-top' id='images' src='../vues/Images/"+ uneCategVente.getImg_url() +"' alt='image de la categ' style='max-height : 270px;'>");
                 out.println("<div class='card-body text-dark'>");
-                out.println("<h5 class='card-title'>"+ uneCategVente.getLibelle() +" <span class='badge badge-success float-right'>" + uneCategVente.getNbVente() + " en cours</span></h5>");
+                out.println("<h5 class='card-title'>"+ uneCategVente.getLibelle() +"<span class='badge badge-success float-right'>" + uneCategVente.getNbVente() + " en cours</span> <span class='spinner-grow spinner-grow-sm text-success float-right mt-1 mr-1' role='status'></span></h5>");
                 //out.println("<p></p>");
                 out.println("</div>");
                 out.println("</div>");

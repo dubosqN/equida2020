@@ -28,6 +28,7 @@ import formulaires.EnchereForm;
 import modele.Client;
 import modele.Lot;
 import modele.Pays;
+import modele.Enchere;
 
 /**
  *
@@ -120,8 +121,11 @@ public class ServletAcheteur extends HttpServlet {
             
             Lot unLot = LotDAO.getLotByIdCheval(connection, idCheval, idVente);
             request.setAttribute("pIdLot", unLot);
-            System.out.println("IDLOT ======" + unLot.getId());
-
+            
+            int idLot = unLot.getId();
+            Enchere uneEnchere = LotDAO.prixActuel(connection, idLot);
+            request.setAttribute("pMontantEnchere", uneEnchere);
+            
             getServletContext().getRequestDispatcher("/vues/acheteur/ficheCheval.jsp").forward(request, response);
    
         }
@@ -154,7 +158,8 @@ public class ServletAcheteur extends HttpServlet {
         if (form.getErreurs().isEmpty()){
             // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
             LotDAO.encherirSurUnLot(connection, uneEnchere);
-            this.getServletContext().getRequestDispatcher("/acheteur/enchereRecap.jsp" ).forward( request, response );
+            getServletContext().getRequestDispatcher("/vues/acheteur/enchereRecap.jsp" ).forward( request, response );
+            response.sendRedirect("");
         }
         else {
             request.setAttribute("errMessage", "Verifier le montant de l'enchère");
