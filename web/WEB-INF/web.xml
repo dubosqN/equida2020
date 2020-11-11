@@ -16,26 +16,20 @@
         <param-name>motdepassejdbc</param-name>
         <param-value/>
     </context-param>
-    <!--  Filtres 
-    <filter>
-        <filter-name>ServletFilter</filter-name>
-        <filter-class>servlets.ServletFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>loginFilter</filter-name>
-        <url-pattern>/EquidaWeb20/*</url-pattern>
-    </filter-mapping>
-    
-        <filter>
-        <filter-name>ServletFilter</filter-name>
-        <filter-class>servlets.ServletFilter</filter-class>
-    </filter>
- 
-    <filter-mapping>
-        <filter-name>ServletFilter</filter-name>
-        <servlet-name>action</servlet-name>	
-    </filter-mapping>
+
+    <!--    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Accès admin</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>Admin</role-name>
+        </auth-constraint> 
+    </security-constraint>
     -->
+
     <!--  écouteurs -->
     <listener>
         <listener-class>database.InitConnexion</listener-class>
@@ -195,10 +189,29 @@
         <url-pattern>/acheteur/enchereRecap</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletVendeur</servlet-name>
+        <url-pattern>/vendeur/Accueil</url-pattern>
+    </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletVendeur</servlet-name>
-        <url-pattern>/ServletVendeur</url-pattern>
+        <url-pattern>/vendeur/profil</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletVendeur</servlet-name>
+        <url-pattern>/vendeur/updateProfil</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletVendeur</servlet-name>
+        <url-pattern>/vendeur/updateProfilRecap</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletVendeur</servlet-name>
+        <url-pattern>/vendeur/ajouterCheval</url-pattern>
     </servlet-mapping>
     
     

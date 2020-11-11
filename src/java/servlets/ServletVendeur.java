@@ -5,14 +5,25 @@
  */
 package servlets;
 
+import database.CategVenteDAO;
+import database.ClientDAO;
+import database.LotDAO;
+import database.PaysDAO;
+import formulaires.ClientForm;
+import formulaires.EnchereForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.CategVente;
+import modele.Client;
+import modele.Enchere;
+import modele.Pays;
 
 /**
  *
@@ -66,7 +77,29 @@ public class ServletVendeur extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String url = request.getRequestURI();
+        if (url.equals(request.getContextPath() + "/vendeur/Accueil")) {    
+            this.getServletContext().getRequestDispatcher("/vues/vendeur/Vendeur.jsp").forward(request, response);
+        }
+        
+        if (url.equals(request.getContextPath() + "/vendeur/profil")) {
+            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+            request.setAttribute("pLesPays", lesPays);
+            
+            String id_user = request.getParameter("idUtilisateur");
+            Client unClient = ClientDAO.getClientById(connection, id_user);
+            request.setAttribute("pClient", unClient);
+            
+            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+            request.setAttribute("pLesCategVente", lesCategVentes);
+            this.getServletContext().getRequestDispatcher("/vues/vendeur/profilVendeur.jsp").forward(request, response);
+        }
+        
+        if (url.equals(request.getContextPath() + "/vendeur/ajouterCheval")) {
+
+            this.getServletContext().getRequestDispatcher("/vues/vendeur/ajouterCheval.jsp").forward(request, response);
+        }   
     }
 
     /**
@@ -80,7 +113,17 @@ public class ServletVendeur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ClientForm form = new ClientForm();
+        Client unClient = form.updateClient(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute("form", form);
+        request.setAttribute("pClient", unClient);
+		
+        if (form.getErreurs().isEmpty()){
+            ClientDAO.updateClient(connection, unClient);
+            getServletContext().getRequestDispatcher("/vues/vendeur/updateProfilRecap.jsp" ).forward( request, response );
+        }
     }
 
     /**

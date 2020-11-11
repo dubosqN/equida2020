@@ -1,12 +1,15 @@
 package database;
 
+import static database.VenteDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import modele.Cheval;
 import modele.Client;
 import modele.Pays;
+import modele.TypeCheval;
 
 /**
  *
@@ -100,6 +103,67 @@ public class ClientDAO {
         {
             e.printStackTrace();
             //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return unClient ;    
+    }
+    
+    public static Client getClientById(Connection connection, String idUtilisateur){      
+        
+        Client unClient = null;
+        try
+        {
+              unClient = new Client();
+            requete=connection.prepareStatement("SELECT client.* from client, utilisateur where utilisateur.id_client = client.id and utilisateur.id = ?");
+            requete.setInt(1, Integer.parseInt(idUtilisateur));
+
+            rs=requete.executeQuery();
+             
+                while ( rs.next() ) {
+     
+                unClient.setId(rs.getInt("id"));
+                unClient.setNom(rs.getString("nom"));
+                unClient.setPrenom(rs.getString("prenom"));
+                unClient.setRue(rs.getString("rue"));
+                unClient.setCopos(rs.getString("copos"));
+                unClient.setVille(rs.getString("ville"));
+                unClient.setMail(rs.getString("mail"));
+                
+                Pays unPays = new Pays();
+                unPays.setCode(rs.getString("codePays"));
+                
+                unClient.setUnPays(unPays);
+                }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return unClient;
+        
+    }
+    
+    public static Client updateClient(Connection connection, Client unClient){      
+        try
+        {
+            requete=connection.prepareStatement("UPDATE client SET nom = ?, prenom = ?, rue = ?, copos = ?, ville = ?, mail = ?, codePays = ? WHERE id = ?");
+            requete.setString(1, unClient.getNom());
+            requete.setString(2, unClient.getPrenom());
+            requete.setString(3, unClient.getRue());
+            requete.setString(4, unClient.getCopos());
+            requete.setString(5, unClient.getVille());
+            requete.setString(6, unClient.getMail());
+            requete.setString(7, unClient.getUnPays().getCode());
+            requete.setInt(8, unClient.getId());
+
+
+           /* Exécution de la requête */
+            requete.executeUpdate();
+
+            
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
         }
         return unClient ;    
     }

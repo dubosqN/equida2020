@@ -48,7 +48,7 @@ public class ClientForm {
     erreurs.put(champ, message);
     }    
     
-    private static String getDataForm( HttpServletRequest request, String nomChamp ) {
+    private static String getDataForm(HttpServletRequest request, String nomChamp) {
         String valeur = request.getParameter( nomChamp );
         if ( valeur == null || valeur.trim().length() == 0 ) {
             return null;
@@ -68,31 +68,6 @@ public class ClientForm {
         String copos = getDataForm( request, "copos");
         String ville = getDataForm( request, "ville" );
         String pays = getDataForm( request, "pays" );
-        
-        // Traitement de la liste à choix multiple
-        //Pour chq catégorie selectionné, on instancie une nouvelle catégorie et on l'ajoute au client
-        CategVente uneCategVente ;
-        String[] categVente = request.getParameterValues("categVente");
-        for (int i=0; i<categVente.length; i++){
-            uneCategVente = new CategVente();
-            uneCategVente.setCode(categVente[i]);
-            unClient.addUneCategVente(uneCategVente);
-        }
-        
- 
-       
-        try {
-             validationNom( nom );
-        } catch ( Exception e ) {
-            setErreur( "nom", e.getMessage() );
-        }
-        unClient.setNom(nom);
-
-        if ( erreurs.isEmpty() ) {
-            resultat = "Succès de l'ajout.";
-        } else {
-            resultat = "Échec de l'ajout.";
-        }
          
       
         unClient.setPrenom(prenom);
@@ -104,5 +79,31 @@ public class ClientForm {
        
         return unClient;
     }
-
+    
+    public Client updateClient( HttpServletRequest request ) {
+      
+        Client unClient  = new Client();
+         
+        String id = getDataForm(request, "id");
+        String nom = getDataForm(request, "nom");
+        String prenom = getDataForm(request, "prenom");
+        String rue = getDataForm(request, "rue");
+        String copos = getDataForm(request, "copos");
+        String ville = getDataForm(request, "ville");
+        String mail = getDataForm(request, "mail");
+        String pays = getDataForm(request, "pays");
+        
+        unClient.setId(Integer.parseInt(id));
+        unClient.setNom(nom);
+        unClient.setPrenom(prenom);
+        unClient.setRue(rue);
+        unClient.setCopos(copos);
+        unClient.setVille(ville);
+        unClient.setMail(mail);
+        unClient.setUnPays(new Pays(pays));
+               
+       
+        return unClient;
+    }
+    
 }

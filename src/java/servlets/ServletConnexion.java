@@ -85,12 +85,14 @@ public class ServletConnexion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
-        String passsword = request.getParameter("password");
+        String password = request.getParameter("password");
+        String id = request.getParameter("id");
 
         Utilisateur unUtilisateur = new Utilisateur();
 
         unUtilisateur.setUsername(username);
-        unUtilisateur.setPassword(passsword);
+        unUtilisateur.setPassword(password);
+        //unUtilisateur.setId(Integer.parseInt(id));
 
         UserDAO unUserDAO = new UserDAO();
        
@@ -98,36 +100,37 @@ public class ServletConnexion extends HttpServlet {
 //        request.setAttribute("pLesCategVente", lesCategVentes);
 
         try {
-            String userRole = unUserDAO.authentification(connection, unUtilisateur);
+            String[] userRole = unUserDAO.authentification(connection, unUtilisateur);
 
-            if (userRole.equals("admin")) {
+            if (userRole[0].equals("admin")) {
                 System.out.println("admin");
                 HttpSession session = request.getSession(); //création de la session
                 session.setAttribute("admin", username); //attribution du role admin pour la session
                 session.setAttribute("role", userRole);
                 response.sendRedirect(request.getContextPath() + "/admin/Accueil");
 
-            } else if (userRole.equals("employee")) {
+            } else if (userRole[0].equals("employee")) {
                 System.out.println("employee");
                 HttpSession session = request.getSession(); 
                 session.setAttribute("employee", username); 
                 request.setAttribute("username", username);
                 request.getRequestDispatcher("/vues/employee/Employee.jsp").forward(request, response);
-            } else if (userRole.equals("acheteur")) {
+            } else if (userRole[0].equals("acheteur")) {
                 System.out.println("acheteur");
                 HttpSession session = request.getSession(); 
                 session.setAttribute("acheteur", username); 
                 request.setAttribute("username", username);
                 response.sendRedirect(request.getContextPath() + "/acheteur/Accueil");
-            } else if (userRole.equals("vendeur")) {
+            } else if (userRole[0].equals("vendeur")) {
                 System.out.println("vendeur");
                 HttpSession session = request.getSession(); 
-                session.setAttribute("vendeur", username); 
-                request.setAttribute("username", username);
+                session.setAttribute("vendeur", username);
+                session.setAttribute("id_user", userRole[1]);
+                
                 response.sendRedirect(request.getContextPath() + "/vendeur/Accueil");
             } else {
                 System.out.println("Erreur! <" + userRole + ">");
-                request.setAttribute("errMessage", userRole);
+                request.setAttribute("errMessage", userRole[0]);
 
                 request.getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
             }

@@ -73,7 +73,7 @@
                 Enchere uneEnchere = (Enchere) request.getAttribute("pMontantEnchere");
             
             %>
-            <form action="<%=request.getContextPath()%>/acheteur/encherir" method="post">
+            <form id="form" action="<%=request.getContextPath()%>/acheteur/encherir" method="post">
             <div class="card mb-3" style="max-width: 1110px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -184,30 +184,34 @@
                                                else {
                                                    out.println("<button class='btn btn-outline-success' type='submit' id='encherir' >Enchérir</button>");
                                                    out.println("</div>");
-                                                   out.println("<input name='montant' type='text' maxlength='6' class='form-control' placeholder='Montant' required>");
+                                                   out.println("<input id='montant' name='montant' type='text' class='form-control' placeholder='Montant'>");
                                                }
                                            %>
-                                       <input name = "idLot" type="hidden" value="<% out.println(unLot.getId()); %>">
+                                       <input name="idLot" type="hidden" value="<% out.println(unLot.getId()); %>">
+                                       
                                    </div>
+                                      
                                </div>
                                <div class="col-sm-1"></div>
                                 <div class="col-sm-7">
                                     <div class="alert alert-warning float-right" role="alert">
                                         <h5 id="countdown"></h5>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
-                        </div>
+                            <div id='erreur' style="color: crimson;"></div>
+                        </div>           
                     </div>
                 </div>
             </div>
         </form>
                           
     </div>
-    <!-- Optional JavaScript -->
+    <!-- Optional JavaScript 
+    <script src="../vues/script/scriptAcheteur.js"></script>
+    -->
     
     <!-- Script pour concatenner le temps en secondes, puis le remettre en J/H/M/S -->
-    <% System.out.println("Restant:" + uneVente.getTempsRestant(uneVente.getHeureVente())); %>
         <script>
         var upgradeTime = <% out.println(uneVente.getTempsRestant(uneVente.getHeureVente())); %>
         var seconds = upgradeTime;
@@ -231,6 +235,32 @@
         else{
             document.getElementById('countdown').innerHTML = "Cette vente est terminée !";
         }
+        
+        /* Vérification du prix de l'enchère */
+
+        const prixActuel =<% out.println(uneEnchere.getMontant()); %>
+        const montant = document.getElementById('montant');
+        const form = document.getElementById('form');
+        const erreurSpan = document.getElementById('erreur');
+
+        form.addEventListener('submit', (e) => {
+            let messages = [];
+            if (montant.value === '' || montant.value == null) {
+                messages.push('Vous devez saisir un montant');
+            }
+            if (montant.value <= prixActuel) {
+                messages.push('Le montant doit être supérieur au prix actuel');
+            }
+            if (montant.value.length >= 9) {
+                messages.push('Le montant ne peut dépasser 9 chiffres.');
+            }
+
+            if (messages.length > 0) {
+                e.preventDefault();
+                erreurSpan.innerText = messages.join('\n');
+            }
+        });
+
         </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
