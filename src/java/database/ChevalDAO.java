@@ -5,6 +5,7 @@
  */
 package database;
 
+import static database.VenteDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,7 +77,61 @@ public class ChevalDAO {
             e.printStackTrace();
         }
         return lesChevaux ;    
-    } 
+    }
+     
+    public static ArrayList<Cheval>  getLesChevauxByClient(Connection connection, String idClient){      
+        ArrayList<Cheval> lesChevaux = new  ArrayList<Cheval>();
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("SELECT cheval.id, cheval.nom, cheval.sexe, cheval.prixDepart, cheval.SIRE as chevalSire, cheval.img_url, cheval.isActive, typecheval.libelle as Race, chevalPere.nom as pere, chevalMere.nom as mere, client.nom as nomVendeur "
+                    + "FROM client, cheval, typecheval, cheval chevalPere, cheval chevalMere "
+                    + "WHERE cheval.id_typeCheval = typecheval.id AND cheval.id_pere = chevalPere.id AND cheval.id_mere = chevalMere.id "
+                    + "AND cheval.id_client = client.id AND cheval.id_client = ? order by cheval.id;");
+            
+            //executer la requete
+            requete.setString(1, idClient);
+            rs=requete.executeQuery();
+            
+            while ( rs.next() ) {
+                Cheval unCheval = new Cheval();
+                unCheval.setId(rs.getInt("id"));
+                unCheval.setNom(rs.getString("nom"));
+                unCheval.setSexe(rs.getString("sexe"));
+                unCheval.setPrixDepart(rs.getInt("prixDepart"));
+                unCheval.setSIRE(rs.getString("chevalSire"));
+                unCheval.setImg_url(rs.getString("img_url"));
+                unCheval.setIsActive(rs.getInt("isActive"));
+               
+                Cheval unChevalPere = new Cheval();
+                unChevalPere.setNom(rs.getString("pere"));
+                
+                Cheval unChevalMere = new Cheval();
+                unChevalMere.setNom(rs.getString("mere"));
+                
+                
+                Client unClient = new Client();
+                unClient.setNom(rs.getString("nomVendeur"));
+                
+                TypeCheval unTypeCheval = new TypeCheval();
+                unTypeCheval.setLibelle(rs.getString("Race"));
+                
+                
+                unCheval.setLeTypeDeCheval(unTypeCheval);
+                unCheval.setUnClient(unClient);
+                
+                unCheval.setPere(unChevalPere);
+                unCheval.setMere(unChevalMere);
+                
+                lesChevaux.add(unCheval);
+            }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return lesChevaux ;    
+    }  
     
      public static Cheval ajouterCheval(Connection connection, Cheval unCheval){      
         int idGenere = -1;
@@ -86,8 +141,8 @@ public class ChevalDAO {
             // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO cheval ( nom, sexe, prixDepart, SIRE, id_client, id_typeCheval, id_mere, id_pere)\n" +
-                    "VALUES (?,?,?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
+            requete=connection.prepareStatement("INSERT INTO cheval ( nom, sexe, prixDepart, SIRE, id_client, id_typeCheval, id_mere, id_pere, img_url)\n" +
+                    "VALUES (?,?,?,?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
             requete.setString(1, unCheval.getNom());
             requete.setString(2, unCheval.getSexe());
             requete.setInt(3, unCheval.getPrixDepart());
@@ -96,6 +151,7 @@ public class ChevalDAO {
             requete.setInt(6, unCheval.getLeTypeDeCheval().getId());
             requete.setInt(7, unCheval.getMere().getId());
             requete.setInt(8, unCheval.getPere().getId());
+            requete.setString(9, unCheval.getImg_url());
 
            /* Exécution de la requête */
             requete.executeUpdate();
@@ -117,13 +173,4 @@ public class ChevalDAO {
         return unCheval;    
     }
      
-     public void deleteCheval(Connection connection, int idCheval){
-         try {
-             requete=connection.prepareStatement("DELETE FROM cheval WHERE id = ?");
-             requete.setInt(1, idCheval);
-             requete.executeUpdate();
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }
 }

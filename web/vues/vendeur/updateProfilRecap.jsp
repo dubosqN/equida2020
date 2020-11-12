@@ -38,7 +38,7 @@
   <script>
         if(true){
         window.setTimeout(function(){
-            window.location.href = "/EquidaWeb20/vendeur/Accueil";
+            window.location.href = "/MASTER/vendeur/Accueil";
         }, 2500);
         }
   </script>

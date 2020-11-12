@@ -30,10 +30,11 @@ public class UserDAO {
         String passwordDB = "";
         String roleDB = "";
         String idDB;
-        String[] resultat = new String[2];
+        String idClientDB;
+        String[] resultat = new String[3];
         
         try {
-            requete = connection.prepareStatement("SELECT utilisateur.id, utilisateur.username, utilisateur.password, role.libelle as role from utilisateur, role where utilisateur.id_role = role.id");
+            requete = connection.prepareStatement("SELECT utilisateur.id, client.id as clientId, utilisateur.username, utilisateur.password, role.libelle as role from utilisateur, role, client where utilisateur.id_client = client.id and utilisateur.id_role = role.id");
             rs = requete.executeQuery();
             
             while (rs.next()) {
@@ -41,22 +42,27 @@ public class UserDAO {
                 passwordDB = rs.getString("password");
                 roleDB = rs.getString("role");
                 idDB = String.valueOf(rs.getInt("id"));
+                idClientDB = String.valueOf(rs.getString("clientId"));
 
                 if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("admin")) {
                     resultat[0] = "admin";
                     resultat[1] = idDB;
+                    resultat[2] = idClientDB;
                     return resultat;
                 } else if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("employee")) {
                     resultat[0] = "employee";
                     resultat[1] = idDB;
+                    resultat[2] = idClientDB;
                     return resultat;
                 } else if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("acheteur")) {
                     resultat[0] = "acheteur";
                     resultat[1] = idDB;
+                    resultat[2] = idClientDB;
                     return resultat;
                 } else if (username.equals(usernameDB) && password.equals(passwordDB) && roleDB.equals("vendeur")) {
                     resultat[0] = "vendeur";
                     resultat[1] = idDB;
+                    resultat[2] = idClientDB;
                     return resultat;
                 }
             }

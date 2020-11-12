@@ -31,20 +31,11 @@ public class ChevalForm {
     public void setErreurs(Map<String, String> erreurs) {
         this.erreurs = erreurs;
     }
-    
-    //méthode de validation du champ de saisie nom
-    private void validationNom( String nom ) throws Exception {
-        if ( nom != null && nom.length() < 2 ) {
-        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
-        }
-    }
-
-    private void setErreur( String champ, String message ) {
-    erreurs.put(champ, message );
-    }    
+   
     
     private static String getDataForm( HttpServletRequest request, String nomChamp ) {
         String valeur = request.getParameter( nomChamp );
+        System.out.println("Valeur " + nomChamp + "valeur : " +valeur);
         if ( valeur == null || valeur.trim().length() == 0 ) {
             return null;
         } else {
@@ -53,7 +44,7 @@ public class ChevalForm {
     }
     
     
-    public Cheval ajouterCheval( HttpServletRequest request ) {
+    public Cheval ajouterCheval(HttpServletRequest request) {
       
         Cheval unCheval  = new Cheval();
          
@@ -61,25 +52,10 @@ public class ChevalForm {
         String sexe = getDataForm( request, "sexe" );
         String prixDepart = getDataForm( request, "prixDepart" );
         String SIRE = getDataForm( request, "sire" );
-        int client =  Integer.parseInt(getDataForm(request, "client"));
+        int client = Integer.parseInt(getDataForm(request, "client"));
         int typeCheval = Integer.parseInt(getDataForm(request, "typeCheval"));
         int mere = Integer.parseInt(getDataForm(request, "mere"));
         int pere = Integer.parseInt(getDataForm(request, "pere"));
-        
- 
-       
-        try {
-             validationNom( nom );
-        } catch ( Exception e ) {
-            setErreur( "nom", e.getMessage() );
-        }
-        unCheval.setNom(nom);
-
-        if ( erreurs.isEmpty() ) {
-            resultat = "Succès de l'ajout.";
-        } else {
-            resultat = "Échec de l'ajout.";
-        }
          
       
         unCheval.setNom(nom);

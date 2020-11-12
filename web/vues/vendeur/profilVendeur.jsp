@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/EquidaWeb20/vendeur/Accueil">Accueil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/MASTER/vendeur/Accueil">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
                 <a href="#" class="text-info px-3 text-decoration-none">Profil</a>

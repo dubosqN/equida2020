@@ -126,6 +126,7 @@ public class ServletConnexion extends HttpServlet {
                 HttpSession session = request.getSession(); 
                 session.setAttribute("vendeur", username);
                 session.setAttribute("id_user", userRole[1]);
+                session.setAttribute("id_client", userRole[2]);
                 
                 response.sendRedirect(request.getContextPath() + "/vendeur/Accueil");
             } else {

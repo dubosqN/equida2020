@@ -6,9 +6,12 @@
 package servlets;
 
 import database.CategVenteDAO;
+import database.ChevalDAO;
 import database.ClientDAO;
 import database.LotDAO;
 import database.PaysDAO;
+import database.TypeDeChevalDAO;
+import formulaires.ChevalForm;
 import formulaires.ClientForm;
 import formulaires.EnchereForm;
 import java.io.IOException;
@@ -21,9 +24,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modele.CategVente;
+import modele.Cheval;
 import modele.Client;
 import modele.Enchere;
 import modele.Pays;
+import modele.TypeCheval;
 
 /**
  *
@@ -79,7 +84,10 @@ public class ServletVendeur extends HttpServlet {
             throws ServletException, IOException {
         
         String url = request.getRequestURI();
-        if (url.equals(request.getContextPath() + "/vendeur/Accueil")) {    
+        if (url.equals(request.getContextPath() + "/vendeur/Accueil")) {
+            ArrayList<Cheval> lesChevaux = ChevalDAO.getLesChevaux(connection);
+            request.setAttribute("pLesChevaux", lesChevaux);   
+            
             this.getServletContext().getRequestDispatcher("/vues/vendeur/Vendeur.jsp").forward(request, response);
         }
         
@@ -97,9 +105,33 @@ public class ServletVendeur extends HttpServlet {
         }
         
         if (url.equals(request.getContextPath() + "/vendeur/ajouterCheval")) {
-
+            ArrayList<Cheval> lesChevaux = ChevalDAO.getLesChevaux(connection);
+            request.setAttribute("pLesChevaux", lesChevaux);
+            
+            ArrayList<TypeCheval> lesTypeDeChevaux = TypeDeChevalDAO.getLesTypeDeChevaux(connection);
+            request.setAttribute("pLesTypesDeChevaux", lesTypeDeChevaux);
+            
+            ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
+            request.setAttribute("pLesClients", lesClients);
+            
+            ArrayList<Cheval> lesChevauxMere = ChevalDAO.getLesChevaux(connection);
+            request.setAttribute("pLesChevauxMere", lesChevauxMere);
+            
+            ArrayList<Cheval> lesChevauxPere = ChevalDAO.getLesChevaux(connection);
+            request.setAttribute("pLesChevauxPere", lesChevauxPere);
+            
             this.getServletContext().getRequestDispatcher("/vues/vendeur/ajouterCheval.jsp").forward(request, response);
         }   
+        
+        if (url.equals(request.getContextPath() + "/vendeur/listerCheval")) {
+            String id_client = request.getParameter("idClient");
+            
+            ArrayList<Cheval> lesChevaux = ChevalDAO.getLesChevauxByClient(connection, id_client);
+            request.setAttribute("pLesChevaux", lesChevaux);
+           
+            
+            this.getServletContext().getRequestDispatcher("/vues/vendeur/listerCheval.jsp").forward(request, response);
+        }  
     }
 
     /**
@@ -113,16 +145,31 @@ public class ServletVendeur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ClientForm form = new ClientForm();
-        Client unClient = form.updateClient(request);
+        String url = request.getRequestURI();
         
-        /* Stockage du formulaire et de l'objet dans l'objet request */
-        request.setAttribute("form", form);
-        request.setAttribute("pClient", unClient);
-		
-        if (form.getErreurs().isEmpty()){
-            ClientDAO.updateClient(connection, unClient);
-            getServletContext().getRequestDispatcher("/vues/vendeur/updateProfilRecap.jsp" ).forward( request, response );
+        if (url.equals(request.getContextPath() + "/vendeur/updateProfil")) {
+            ClientForm form = new ClientForm();
+            Client unClient = form.updateClient(request);
+
+            /* Stockage du formulaire et de l'objet dans l'objet request */
+            request.setAttribute("form", form);
+            request.setAttribute("pClient", unClient);
+
+            if (form.getErreurs().isEmpty()){
+                ClientDAO.updateClient(connection, unClient);
+                getServletContext().getRequestDispatcher("/vues/vendeur/updateProfilRecap.jsp" ).forward(request, response);
+            }
+        }
+        
+        if (url.equals(request.getContextPath() + "/vendeur/demandeCheval")) {
+            ChevalForm unChevalForm = new ChevalForm();
+            Cheval unCheval = unChevalForm.ajouterCheval(request);
+            request.setAttribute("pCheval", unCheval);
+
+             if (unChevalForm.getErreurs().isEmpty()){
+                ChevalDAO.ajouterCheval(connection, unCheval);
+                getServletContext().getRequestDispatcher("/vues/vendeur/updateProfilRecap.jsp" ).forward(request, response);
+            }
         }
     }
 

@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 08 nov. 2020 à 17:23
--- Version du serveur :  5.7.31
+-- Généré le : jeu. 12 nov. 2020 à 14:42
+-- Version du serveur :  5.7.31-log
 -- Version de PHP : 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `cheval` (
   `prixDepart` int(25) DEFAULT NULL,
   `SIRE` varchar(20) DEFAULT NULL,
   `img_url` varchar(255) DEFAULT NULL,
-  `isActive` int(1) NOT NULL DEFAULT '1',
+  `isActive` int(1) NOT NULL DEFAULT '0',
   `id_client` int(11) DEFAULT NULL,
   `id_typeCheval` int(11) DEFAULT NULL,
   `id_mere` int(11) DEFAULT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `cheval` (
   KEY `FK_CHECHE` (`id_mere`),
   KEY `FK_CHECHE2` (`id_pere`),
   KEY `fk_entche` (`idEntraineur`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `cheval`
@@ -85,7 +85,9 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `prixDepart`, `SIRE`, `img_url`, `isA
 (5, 'Parents Inconnus', '/', 0, '/', 'hiver.jpg', 0, 22, 2, NULL, NULL, 1),
 (6, 'Hugo', 'F', 100, 'HDF10', 'hiver.jpg', 0, 18, 2, 3, 2, 2),
 (7, 'DUBOSQ', 'F', 1, 'DADFL', 'ete.jpg', 1, 1, 1, 1, 1, NULL),
-(8, 'DUBOSQ', 'F', 123, 'dadaa', 'hiver.jpg', 1, 22, 1, 2, 2, NULL);
+(8, 'DUBOSQ', 'F', 123, 'dadaa', 'hiver.jpg', 1, 22, 1, 2, 2, NULL),
+(9, 'DUBOSQ2', '1', 100, 'SLAD', NULL, 0, 1, 1, 5, 5, NULL),
+(10, 'DUBOSQ', 'M', 100, 'SLADA', NULL, 0, 51, 1, 5, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -96,16 +98,16 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `prixDepart`, `SIRE`, `img_url`, `isA
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(40) CHARACTER SET latin1 NOT NULL,
-  `prenom` varchar(40) CHARACTER SET latin1 NOT NULL,
-  `rue` varchar(60) CHARACTER SET latin1 NOT NULL,
-  `copos` varchar(5) CHARACTER SET latin1 NOT NULL,
-  `ville` varchar(40) CHARACTER SET latin1 NOT NULL,
+  `nom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `prenom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `rue` varchar(60) CHARACTER SET latin1 DEFAULT NULL,
+  `copos` varchar(5) CHARACTER SET latin1 DEFAULT NULL,
+  `ville` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
   `mail` varchar(60) CHARACTER SET latin1 DEFAULT NULL,
   `codePays` varchar(3) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_cli_pays` (`codePays`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Déchargement des données de la table `client`
@@ -161,7 +163,11 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `rue`, `copos`, `ville`, `mail`, `c
 (47, 'Gest', 'Alain', '30 avenue des terres', '14320', 'Saint Martin de Fontenay', '', 'FRA'),
 (48, 'Testemale', 'tarek', 'du trek', '14000', 'Tarascon', NULL, 'FRA'),
 (49, 'Trieste', 'Thierry', 'du tertre', '14000', 'Tologne', NULL, 'FRA'),
-(50, 'test04sept', 'luc', 'de ahjk', '121', 'jkjklj', NULL, 'FRA');
+(50, 'test04sept', 'luc', 'de ahjk', '121', 'jkjklj', NULL, 'FRA'),
+(51, 'DUBOSQ', 'Noé', '510 boulevard du val', '14200', 'HEROUVILLE-SAINT-CLAIR', 'noe.dubosq.allende@gmail.com', 'FRA'),
+(52, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(53, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(54, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -244,10 +250,10 @@ CREATE TABLE IF NOT EXISTS `enchere` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `montant` int(11) DEFAULT NULL,
   `id_lot` int(11) DEFAULT NULL,
-  `dateEnchere` datetime DEFAULT CURRENT_TIMESTAMP,
+  `dateEnchere` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_ENCHERE_LOT` (`id_lot`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `enchere`
@@ -255,7 +261,11 @@ CREATE TABLE IF NOT EXISTS `enchere` (
 
 INSERT INTO `enchere` (`id`, `montant`, `id_lot`, `dateEnchere`) VALUES
 (1, 1000, 1, '2020-11-08 17:53:38'),
-(2, 1000, 7, '2020-11-08 18:21:40');
+(2, 1000, 7, '2020-11-08 18:21:40'),
+(3, 1000, 1, '2020-11-10 08:19:46'),
+(4, 900, 1, '2020-11-10 09:06:15'),
+(5, 15890, 1, '2020-11-10 09:20:47'),
+(6, 15891, 1, '2020-11-12 13:06:22');
 
 -- --------------------------------------------------------
 
@@ -480,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`id`),
   KEY `FK_ROLEUSER` (`id_role`),
   KEY `FK_CLIUSER` (`id_client`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -488,7 +498,11 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`id`, `username`, `password`, `email`, `id_role`, `id_client`) VALUES
 (6, 'Noe', 'mpnoenoe', 'noe.dubosq.allende@gmail.com', 1, NULL),
-(7, 'Melvyn', 'mpmelvin', 'melvyb@gmail.com', 3, NULL);
+(7, 'Melvyn', 'mpmelvin', 'melvyb@gmail.com', 3, NULL),
+(8, 'Vendeur6', 'mpvendeur1', 'noe.dubosq.allende@gmail.com', 4, 51),
+(9, 'noenoe', 'azertyuiop', 'noe.dubosq.allende@gmail.com', 4, 52),
+(10, 'noenoenoenoe', 'azertyuiop', 'noe.dubosq.allende@gmail.com', 4, 53),
+(11, 'noenoenoenoe', 'lopmlopmlopm', 'noe.dubosq.allende@gmail.com', 4, 54);
 
 -- --------------------------------------------------------
 

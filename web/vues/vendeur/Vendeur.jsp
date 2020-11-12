@@ -1,3 +1,5 @@
+<%@page import="modele.Cheval"%>
+<%@page import="java.util.ArrayList"%>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -27,10 +29,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/EquidaWeb20/vendeur/Accueil">Accueil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/MASTER/vendeur/Accueil">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/EquidaWeb20/vendeur/ajouterCheval">Ajouter un cheval</a>
+                        <a class="nav-link" href="/MASTER/vendeur/ajouterCheval">Ajouter un cheval</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/MASTER/vendeur/listerCheval?idClient=<%out.println(session.getAttribute("id_client"));%>">Lister vos chevaux</a>
                     </li>
                 </ul>
                 <a href="<%=request.getContextPath()%>/vendeur/profil?idUtilisateur=<% out.println(session.getAttribute("id_user")); %>" class="text-info px-3 text-decoration-none">Profil</a>
@@ -46,13 +51,10 @@
                 <span class="font-weight-light">Lors de votre première connexion n'oubliez pas de renseigner vos informations dans l'onglet profil.</span>
             </div>
         </div> 
-        <% //ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVente"); %>
+
         <div class="container">
-            <h1 class="text-center">Liste de vos chevaux</h1>
-                
-            <div class="row row-cols-1 row-cols-md-2">
-                <% 
-%>
+
+   
             </div>
         </div>
             
