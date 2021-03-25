@@ -130,7 +130,7 @@ public class ServletConnexion extends HttpServlet {
                 
                 response.sendRedirect(request.getContextPath() + "/vendeur/Accueil");
             } else {
-                System.out.println("Erreur! <" + userRole + ">");
+                System.out.println("Erreur! <" + username + ">");
                 request.setAttribute("errMessage", userRole[0]);
 
                 request.getRequestDispatcher("/vues/connexion/login.jsp").forward(request, response);
